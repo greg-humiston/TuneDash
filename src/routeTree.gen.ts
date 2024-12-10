@@ -19,6 +19,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AuthAuthImport } from './routes/auth/_auth'
 import { Route as AuthSessionIdHomeImport } from './routes/auth/$sessionId/home'
+import { Route as AuthSessionIdCreatedashImport } from './routes/auth/$sessionId/create_dash'
 import { Route as AuthSessionIdDashIdOpendashImport } from './routes/auth/$sessionId/$dashId/open_dash'
 import { Route as AuthSessionIdDashIdCurrentdashImport } from './routes/auth/$sessionId/$dashId/current_dash'
 
@@ -66,6 +67,12 @@ const AuthAuthRoute = AuthAuthImport.update({
 const AuthSessionIdHomeRoute = AuthSessionIdHomeImport.update({
   id: '/$sessionId/home',
   path: '/$sessionId/home',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSessionIdCreatedashRoute = AuthSessionIdCreatedashImport.update({
+  id: '/$sessionId/create_dash',
+  path: '/$sessionId/create_dash',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -129,6 +136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexImport
       parentRoute: typeof AuthImport
     }
+    '/auth/$sessionId/create_dash': {
+      id: '/auth/$sessionId/create_dash'
+      path: '/$sessionId/create_dash'
+      fullPath: '/auth/$sessionId/create_dash'
+      preLoaderRoute: typeof AuthSessionIdCreatedashImport
+      parentRoute: typeof AuthImport
+    }
     '/auth/$sessionId/home': {
       id: '/auth/$sessionId/home'
       path: '/$sessionId/home'
@@ -158,6 +172,7 @@ declare module '@tanstack/react-router' {
 interface AuthRouteChildren {
   AuthAuthRoute: typeof AuthAuthRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  AuthSessionIdCreatedashRoute: typeof AuthSessionIdCreatedashRoute
   AuthSessionIdHomeRoute: typeof AuthSessionIdHomeRoute
   AuthSessionIdDashIdCurrentdashRoute: typeof AuthSessionIdDashIdCurrentdashRoute
   AuthSessionIdDashIdOpendashRoute: typeof AuthSessionIdDashIdOpendashRoute
@@ -166,6 +181,7 @@ interface AuthRouteChildren {
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAuthRoute: AuthAuthRoute,
   AuthIndexRoute: AuthIndexRoute,
+  AuthSessionIdCreatedashRoute: AuthSessionIdCreatedashRoute,
   AuthSessionIdHomeRoute: AuthSessionIdHomeRoute,
   AuthSessionIdDashIdCurrentdashRoute: AuthSessionIdDashIdCurrentdashRoute,
   AuthSessionIdDashIdOpendashRoute: AuthSessionIdDashIdOpendashRoute,
@@ -179,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/auth': typeof AuthAuthRoute
   '/auth/': typeof AuthIndexRoute
+  '/auth/$sessionId/create_dash': typeof AuthSessionIdCreatedashRoute
   '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
   '/auth/$sessionId/$dashId/current_dash': typeof AuthSessionIdDashIdCurrentdashRoute
   '/auth/$sessionId/$dashId/open_dash': typeof AuthSessionIdDashIdOpendashRoute
@@ -189,6 +206,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/auth': typeof AuthIndexRoute
+  '/auth/$sessionId/create_dash': typeof AuthSessionIdCreatedashRoute
   '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
   '/auth/$sessionId/$dashId/current_dash': typeof AuthSessionIdDashIdCurrentdashRoute
   '/auth/$sessionId/$dashId/open_dash': typeof AuthSessionIdDashIdOpendashRoute
@@ -202,6 +220,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRouteWithChildren
   '/auth/_auth': typeof AuthAuthRoute
   '/auth/': typeof AuthIndexRoute
+  '/auth/$sessionId/create_dash': typeof AuthSessionIdCreatedashRoute
   '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
   '/auth/$sessionId/$dashId/current_dash': typeof AuthSessionIdDashIdCurrentdashRoute
   '/auth/$sessionId/$dashId/open_dash': typeof AuthSessionIdDashIdOpendashRoute
@@ -215,6 +234,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/auth'
     | '/auth/'
+    | '/auth/$sessionId/create_dash'
     | '/auth/$sessionId/home'
     | '/auth/$sessionId/$dashId/current_dash'
     | '/auth/$sessionId/$dashId/open_dash'
@@ -224,6 +244,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/auth'
+    | '/auth/$sessionId/create_dash'
     | '/auth/$sessionId/home'
     | '/auth/$sessionId/$dashId/current_dash'
     | '/auth/$sessionId/$dashId/open_dash'
@@ -235,6 +256,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/auth/_auth'
     | '/auth/'
+    | '/auth/$sessionId/create_dash'
     | '/auth/$sessionId/home'
     | '/auth/$sessionId/$dashId/current_dash'
     | '/auth/$sessionId/$dashId/open_dash'
@@ -285,6 +307,7 @@ export const routeTree = rootRoute
       "children": [
         "/auth/_auth",
         "/auth/",
+        "/auth/$sessionId/create_dash",
         "/auth/$sessionId/home",
         "/auth/$sessionId/$dashId/current_dash",
         "/auth/$sessionId/$dashId/open_dash"
@@ -296,6 +319,10 @@ export const routeTree = rootRoute
     },
     "/auth/": {
       "filePath": "auth/index.tsx",
+      "parent": "/auth"
+    },
+    "/auth/$sessionId/create_dash": {
+      "filePath": "auth/$sessionId/create_dash.tsx",
       "parent": "/auth"
     },
     "/auth/$sessionId/home": {

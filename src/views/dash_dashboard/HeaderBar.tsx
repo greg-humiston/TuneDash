@@ -12,6 +12,10 @@ const SettingsPopup = (props) => {
 		navigate({ to: `../../home` });
 	};
 
+	const handleNavigateCreateDash = () => {
+		navigate({ to: `../create_dash` });
+	};
+
 	const isHomeButtonDisabled = location.pathname?.includes('home');
 	const homeButtonClassName = isHomeButtonDisabled ? 'disabled' : '';
 	return (
@@ -23,6 +27,13 @@ const SettingsPopup = (props) => {
 					className={homeButtonClassName}
 				>
 					Home
+				</button>
+				<button 
+					onClick={handleNavigateCreateDash}
+					disabled={isHomeButtonDisabled}
+					className={homeButtonClassName}
+				>
+					Create Dash
 				</button>
 			</div>
 			<div className="logout-button-container">
