@@ -1,8 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 import axios from 'axios';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { Login } from './views/login/Login';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const YOUTUBE_API_KEY = '';
+
+const YOUTUBE_API_KEY = import.meta.env.YOUTUBE_API_KEY;
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 
 // Type definition for YouTube video
@@ -79,19 +83,38 @@ const YouTubeVideoList: React.FC = () => {
   );
 };
 
-// App component wrapping with React Query Provider
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+type SessionData = {
+  userId: string;
+  sessionId: string
+};
 
-const queryClient = new QueryClient();
+const QueryClientWrapper = (props) => {
+  const queryClient = new QueryClient();
 
-export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="app">
+      {props.children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
+}
+
+export const App: React.FC = () => {
+  const [userData, setUserData] = useState({} as SessionData);
+
+  return (
+    <QueryClientWrapper>
+      {/* <div className="app">
         <h1>YouTube Video Search</h1>
         <YouTubeVideoList />
-      </div>
-    </QueryClientProvider>
+      </div> */}
+      {
+        userData.sessionId
+          ? <div>{`Session ID: ${userData.sessionId}`}</div>
+          : <Login onLoginSubmit={setUserData} />
+
+      }
+    </QueryClientWrapper>
   );
 };
 
