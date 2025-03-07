@@ -1,0 +1,12 @@
+.dashboard-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.header-bar-container {
+	height: 80px;
+	width: 100%;
+	background-color: beige;
+}

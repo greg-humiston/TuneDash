@@ -4,6 +4,7 @@ import axios from 'axios';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { Login } from './views/login/Login';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Dashboard } from './views/dash_dashboard/Dashboard';
 
 
 const YOUTUBE_API_KEY = import.meta.env.YOUTUBE_API_KEY;
@@ -108,12 +109,14 @@ export const App: React.FC = () => {
         <h1>YouTube Video Search</h1>
         <YouTubeVideoList />
       </div> */}
+      <div className="app-container">
       {
         userData.sessionId
-          ? <div>{`Session ID: ${userData.sessionId}`}</div>
+          ? <Dashboard/>
           : <Login onLoginSubmit={setUserData} />
 
       }
+      </div>
     </QueryClientWrapper>
   );
 };

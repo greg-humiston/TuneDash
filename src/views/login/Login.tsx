@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import './login.css';
 
 type Login = {
   email: string;
@@ -24,6 +25,26 @@ const signInMutationFn = async (data: Login) => {
 	return responseData;
 };
 
+type LoginData = {
+	email: string;
+	password: string;
+}
+
+const TEST_LOGIN_DATA: LoginData = {
+	email: 'antihero989@gmail.com',
+	password: 'lel'
+};
+
+type SessionData = {
+	sessionId: string;
+	user: string;
+}
+
+const MOCK_USER_SESSION: SessionData = {
+	sessionId: '213423423jh2v34h2v34mn24vn121',
+	user: '23424sdfs'
+};
+
 export const Login = (props) => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -40,10 +61,12 @@ export const Login = (props) => {
 	});
 
 	const onSubmit = () => {
-		mutate({
-			email,
-			password
-		});
+		// mutate({
+		// 	email,
+		// 	password
+		// });
+		
+		props.onLoginSubmit(MOCK_USER_SESSION);
 	};
 
 	return (
@@ -54,24 +77,44 @@ export const Login = (props) => {
 						<div>Loading...</div>
 					)
 					:	(
-						<div>
-							<h1>Login</h1>
-								<div>
-									<span>Email:</span>
-									<input 
-										type="text" 
-										placeholder="Email" 
-										onChange={(e) => setEmail(e.target.value)}
-										value={email}
-									/>
-									<span>Password:</span>
-									<input 
-										type="password" 
-										placeholder="Password" 
-										onChange={(e) => setPassword(e.target.value)}
-										value={password}
-									/>
-									<button onClick={onSubmit} type="submit">Login</button>
+						<div className="login-container">
+							<h1>Tune Dash</h1>
+							<h2>Sign In</h2>
+							<form onSubmit={onSubmit}>
+								<div className="form-group">
+									<div className="form-label">
+										<label htmlFor="email">Email</label>
+									</div>
+									<div className="form-input">
+										<input
+											id="email"
+											type="text"
+											value={email}
+											onChange={(e) => setEmail(e.target.value)}
+											placeholder="Enter your username"
+											required
+										/>
+									</div>
+								</div>
+								<div className="form-group">
+									<div className="form-label">
+										<label htmlFor="password">Password</label>
+									</div>
+									<div className="form-input">
+										<input
+											id="password"
+											type="password"
+											value={password}
+											onChange={(e) => setPassword(e.target.value)}
+											placeholder="Enter your password"
+											required
+										/>
+									</div>
+								</div>
+								<button type="submit">Sign In</button>
+							</form>
+							<div className="forgot-password">
+								<a href="#">Forgot password?</a>
 							</div>
 						</div>
 					)
