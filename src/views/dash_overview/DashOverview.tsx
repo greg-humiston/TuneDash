@@ -5,6 +5,8 @@ import {
 	MOCK_OPEN_DASH_LIST, 
 } from "./overviewMockData";
 
+import './styles.css';
+
 const MOCK_DASH_OVERVIEW = {
 	currentDashList: MOCK_CURRENT_DASH_LIST,
 	openDashList: MOCK_OPEN_DASH_LIST
@@ -19,10 +21,8 @@ export const DashOverview = (props) => {
 
 		return (
 			<div className="dashboard-container">
-				<div>
-					<CurrentDashes dashList={currentDashList}/>
-					<OpenDashes dashList={openDashList}/>
-				</div>
+				<CurrentDashes dashList={currentDashList}/>
+				<OpenDashes dashList={openDashList}/>
 			</div>
 		)
 };

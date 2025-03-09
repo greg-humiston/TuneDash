@@ -4,19 +4,31 @@ import './styles.css';
 export const HeaderBar = (props) => {
 	const { userConfigData } = props;
 
+	const handleUserIconClick = (e: Event) => {
+		e.preventDefault();
+		// TODO
+	};
+
+	const handleOnMenuClick = (e: Event) => {
+		e.preventDefault();
+		// TODO
+	};
+
 	return (
 		<div className="header-bar-container">
-			<div>
-				<div className="profile-picture">
+			<div className="profile-picture">
+				<a onClick={handleUserIconClick}>
 					<img 
 						src={userConfigData.src} 
 						alt={userConfigData.alt}
 					/>
-				</div>
-				<div className="settings-button">
+				</a>
+			</div>
+			<div className="settings-button">
+				<button onClick={handleOnMenuClick}>
 					<MenuIcon/>
-				</div>
+				</button>
 			</div>
 		</div>
-	)
+	);
 }

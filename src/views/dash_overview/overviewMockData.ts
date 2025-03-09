@@ -1,5 +1,5 @@
 
-type DashData = {
+export type DashData = {
 	dashId: string;
   title: string;
   description: string;
@@ -82,7 +82,7 @@ export const MOCK_OPEN_DASH_LIST: DashData[] = [
 		hasVotesBeenSubmitted: true
 	},
 	{
-		dashId: '1234',
+		dashId: '123456',
 		title: 'Jamz of the month 24-25',
 		description: 'The point of this league is to share what you\'ve been vibing to this month. It doesn\'t have to be a new release or anything, just whatever you\'ve been stuck on enjoying. Also, it should be fun. No negative vibes allowed. Songs are due on the last of the month by 11:30 p.m. voting is due by 6:00 p.m. on the 7th of the following month. At the end of each month we\'ll have a nice lil playlist to kick off the next month. I think it\'ll be a fun way to share what we\'ve all been listening to! Thanks.',
 		dashMode: 'Accelerated',
