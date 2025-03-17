@@ -114,7 +114,6 @@ export const App: React.FC = () => {
         userData.sessionId
           ? <Dashboard/>
           : <Login onLoginSubmit={setUserData} />
-
       }
       </div>
     </QueryClientWrapper>
