@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Link, Outlet, redirect } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -23,34 +23,33 @@ const QueryClientWrapper = (props) => {
   );
 }
 
-export const Route = createRootRoute({
-  component: () => {
-    const [userData, setUserData] = useState({} as SessionData);
-    
-    return (
-      <>
-        {/* <div className="p-2 flex gap-2">
-          <Link to="/" className="[&.active]:font-bold">
-            Home
-          </Link>{' '}
-          <Link to="/about" className="[&.active]:font-bold">
-            About
-          </Link>
-        </div>
-        <hr /> */}
-        <QueryClientWrapper>
-          <div className="app-container">
-          {
-            userData.sessionId
-              ? <Dashboard/>
-              : <Login onLoginSubmit={setUserData} />
-          }
-          </div>
-        </QueryClientWrapper>
+import type { AuthContext } from '../auth'
+import { createRootRouteWithContext } from '@tanstack/react-router';
+
+interface MyRouterContext {
+  auth: AuthContext
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  component: () => (
+    <>
+      <QueryClientWrapper>
         <Outlet />
-        <TanStackRouterDevtools />
+      </QueryClientWrapper>
+      <TanStackRouterDevtools position="bottom-right" initialIsOpen={false} />
     </>
-    );
-  },
-  notFoundComponent: () => <div>404 Not Found</div>,
+  ),
 })
+
+
+// export const Route = createRootRoute({
+//   loader: () => {
+//     const sessionId = 34535353;
+//     if (sessionId) {
+//       throw redirect({ to: '/login' });
+//     } else {
+//       throw redirect({ to: `/${sessionId}/home` });
+//     }
+//   },
+//   notFoundComponent: () => <div>404 Not Found</div>,
+// })

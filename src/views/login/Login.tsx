@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import './login.css';
+import { MOCK_USER_SESSION } from "../../mock_data";
 
 type Login = {
   email: string;
@@ -33,16 +34,6 @@ type LoginData = {
 const TEST_LOGIN_DATA: LoginData = {
 	email: 'antihero989@gmail.com',
 	password: 'lel'
-};
-
-type SessionData = {
-	sessionId: string;
-	user: string;
-}
-
-const MOCK_USER_SESSION: SessionData = {
-	sessionId: '213423423jh2v34h2v34mn24vn121',
-	user: '23424sdfs'
 };
 
 export const Login = (props) => {

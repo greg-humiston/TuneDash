@@ -12,9 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
-import { Route as HomeImport } from './routes/home'
 import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
+import { Route as SessionIdHomeImport } from './routes/$sessionId/home'
 
 // Create/Update Routes
 
@@ -24,21 +23,15 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const HomeRoute = HomeImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const AboutRoute = AboutImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const SessionIdHomeRoute = SessionIdHomeImport.update({
+  id: '/$sessionId/home',
+  path: '/$sessionId/home',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,25 +39,11 @@ const IndexRoute = IndexImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -74,54 +53,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/$sessionId/home': {
+      id: '/$sessionId/home'
+      path: '/$sessionId/home'
+      fullPath: '/$sessionId/home'
+      preLoaderRoute: typeof SessionIdHomeImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/$sessionId/home': typeof SessionIdHomeRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/$sessionId/home': typeof SessionIdHomeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/$sessionId/home': typeof SessionIdHomeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/home' | '/login'
+  fullPaths: '/about' | '/login' | '/$sessionId/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/home' | '/login'
-  id: '__root__' | '/' | '/about' | '/home' | '/login'
+  to: '/about' | '/login' | '/$sessionId/home'
+  id: '__root__' | '/about' | '/login' | '/$sessionId/home'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
+  SessionIdHomeRoute: typeof SessionIdHomeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
+  SessionIdHomeRoute: SessionIdHomeRoute,
 }
 
 export const routeTree = rootRoute
@@ -134,23 +115,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/about",
-        "/home",
-        "/login"
+        "/login",
+        "/$sessionId/home"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
     },
     "/about": {
       "filePath": "about.tsx"
     },
-    "/home": {
-      "filePath": "home.tsx"
-    },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/$sessionId/home": {
+      "filePath": "$sessionId/home.tsx"
     }
   }
 }
