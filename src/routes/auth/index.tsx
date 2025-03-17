@@ -7,7 +7,7 @@ import {
 
 import { useAuth } from '../../auth'
 
-export const Route = createFileRoute('/auth/_auth')({
+export const Route = createFileRoute('/auth/')({
   beforeLoad: ({ context, location }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
@@ -19,6 +19,7 @@ export const Route = createFileRoute('/auth/_auth')({
     }
   },
   component: AuthLayout,
+  notFoundComponent: (props) => props.data
 })
 
 function AuthLayout() {

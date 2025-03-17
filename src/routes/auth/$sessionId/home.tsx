@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Dashboard } from '../../../views/dash_dashboard/Dashboard';
 import { useAuth } from '../../../auth';
 
@@ -21,6 +21,11 @@ const HomeRouteComponent = () => {
 };
 
 export const Route = createFileRoute('/auth/$sessionId/home')({
-  component: HomeRouteComponent
+  beforeLoad: ({ params }) => {
+    if (!params.sessionId) {
+      throw redirect({ to: '/login' });
+    }
+  },
+  component: HomeRouteComponent,
 });
 

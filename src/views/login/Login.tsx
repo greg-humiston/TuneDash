@@ -62,7 +62,9 @@ export const Login = (props) => {
 					)
 					:	(
 						<div className="login-container">
-							<h1>Tune Dash</h1>
+							<div className="logo-container">
+								<img className="logo-big" src="/logo.png" alt="icon"/>
+							</div>
 							<h2>Sign In</h2>
 							<form onSubmit={onSubmit}>
 								<div className="form-group">

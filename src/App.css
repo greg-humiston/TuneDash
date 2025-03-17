@@ -52,6 +52,26 @@
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.logo-container {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+}
+
+.login-container .logo-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.header-bar-container .logo-container {
+	height: 100%;
+}
+
+.login-container > img {
+	padding: auto;
+}
+
 h1, h2 {
 	text-align: center;
 	color: #848484;
@@ -196,8 +216,96 @@ a:hover {
 	width: 200px;
 }
 
+.logo-small {
+	width: 50px;
+}
+
 .home-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.dashboard-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.header-bar-container {
+	height: auto;
+	width: 100%;
+	background-color: rgb(72, 72, 72);
+	display: flex;
+	justify-content: space-between;
+}
+
+.header-bar-right {
+	display: flex;
+}
+
+.profile-picture {
+	display: inline-flex;
+	margin-right: 10px;
+}
+
+.profile-picture img {
+	height: auto;
+	width: auto;	
+	border-radius: 50%;
+	padding: 5px;
+}
+
+.settings-button {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+	position: relative;
+}
+
+.settings-button > button {
+	border-color: transparent;
+	transition: none;
+}
+
+.settings-button > button:hover,
+.settings-button > button:focus {
+	border-color: transparent;
+	outline: none;
+}
+
+.settings-button > button.focused {
+	border-color: white;
+}
+
+.settings-popup {
+	position: absolute;
+	top: 100%;
+	right: 0px;
+	padding: 12px 0px 12px 12px;
+	background-color: rgb(26, 26, 26);
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	z-index: 10;
+	min-width: 200px;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+}
+
+.settings-container {
+	flex: 1;
+}
+
+.logout-button-container {
+	justify-self: flex-end;
+	display: flex;
+	justify-content: center;
+}
+
+.logout-button-container > button {
+	width: auto;
+	background-color: rgb(72, 72, 72);
 }

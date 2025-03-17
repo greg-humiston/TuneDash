@@ -1,4 +1,4 @@
-import { Outlet } from '@tanstack/react-router'
+import { Outlet, redirect } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -28,6 +28,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
           <Outlet />
         </QueryClientWrapper>
         <TanStackRouterDevtools position="bottom-right" initialIsOpen={false} />
+      </div>
+    );
+  },
+  errorComponent: (props) => {
+    return (
+      <div>
+        <label>{props.error}</label>
       </div>
     );
   }

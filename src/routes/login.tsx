@@ -34,10 +34,5 @@ const LoginComponent = () => {
 };
 
 export const Route = createFileRoute('/login')({
-  beforeLoad: ({ context }) => {
-    if (context.auth.isAuthenticated) {
-      throw redirect({ to: '/$sessionId/home' })
-    }
-  },
   component: LoginComponent,
 })

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import MenuIcon from '../../assets/menu_white.svg?react';
-import './styles.css';
+import '../../App.css';
 
 const SettingsPopup = (props) => {
 	return (
@@ -31,28 +31,33 @@ export const HeaderBar = (props) => {
 
 	return (
 		<div className="header-bar-container">
-			<div className="profile-picture">
-				<a onClick={handleUserIconClick}>
-					<img 
-						src={userConfigData.src} 
-						alt={userConfigData.alt}
-					/>
-				</a>
+			<div className="logo-container">
+				<img className="logo-small" src="/logo.png" alt="icon"/>
 			</div>
-			<div className="settings-button">
-				<button 
-					onClick={handleOnMenuClick}
-					className={isSettingsOpen ? 'focused' : ''}
-				>
-					<MenuIcon/>
-				</button>
-				{
-					isSettingsOpen
-						?	(
-							<SettingsPopup onLogout={onLogout}/>
-						)
-						: ''
-				}
+			<div className="header-bar-right">
+				<div className="profile-picture">
+					<a onClick={handleUserIconClick}>
+						<img 
+							src={userConfigData.src} 
+							alt={userConfigData.alt}
+						/>
+					</a>
+				</div>
+				<div className="settings-button">
+					<button 
+						onClick={handleOnMenuClick}
+						className={isSettingsOpen ? 'focused' : ''}
+					>
+						<MenuIcon/>
+					</button>
+					{
+						isSettingsOpen
+							?	(
+								<SettingsPopup onLogout={onLogout}/>
+							)
+							: ''
+					}
+				</div>
 			</div>
 		</div>
 	);
