@@ -6,11 +6,14 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="p-2 grid gap-2">
-      <h1 className="text-xl">Welcome!</h1>
-      <Link to="/login" className="text-blue-500 hover:opacity-75">
-        Login
-      </Link>
+    <div className="home-container">
+      <h1 className="text-xl">Welcome to TuneDash!</h1>
+      <img className="logo-big" src="/logo.png" alt="icon"/>
+      <div>
+        <Link to="/login" className="text-blue-500 hover:opacity-75">
+          Go To Sign In
+        </Link>
+      </div>
     </div>
   );
 }
