@@ -13,9 +13,7 @@ const MOCK_DASH_OVERVIEW = {
 };
 
 
-export const DashOverview = (props) => {
-		const { userData } = props;
-
+export const DashOverview = () => {
 		const currentDashList = MOCK_DASH_OVERVIEW.currentDashList;
 		const openDashList = MOCK_DASH_OVERVIEW.openDashList;
 

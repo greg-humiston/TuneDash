@@ -1,7 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import './login.css';
-import { MOCK_USER_SESSION } from "../../mock_data";
 
 type Login = {
   email: string;
@@ -52,12 +50,7 @@ export const Login = (props) => {
 	});
 
 	const onSubmit = () => {
-		// mutate({
-		// 	email,
-		// 	password
-		// });
-		
-		props.onLoginSubmit(MOCK_USER_SESSION);
+		props.onLoginSubmit();
 	};
 
 	return (

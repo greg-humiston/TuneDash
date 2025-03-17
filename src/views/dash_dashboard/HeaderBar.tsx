@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import MenuIcon from '../../assets/menu_white.svg?react';
 import './styles.css';
 
+const SettingsPopup = (props) => {
+	return (
+		<div className="settings-popup">
+			<div className="settings-container">
+
+			</div>
+			<div className="logout-button-container">
+				<button onClick={props.onLogout}>Logout</button>
+			</div>
+		</div>
+	);
+};
+
 export const HeaderBar = (props) => {
-	const { userConfigData } = props;
+	const { userConfigData, onLogout } = props;
+	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
 	const handleUserIconClick = (e: Event) => {
 		e.preventDefault();
@@ -11,7 +26,7 @@ export const HeaderBar = (props) => {
 
 	const handleOnMenuClick = (e: Event) => {
 		e.preventDefault();
-		// TODO
+		setIsSettingsOpen(!isSettingsOpen);
 	};
 
 	return (
@@ -25,9 +40,19 @@ export const HeaderBar = (props) => {
 				</a>
 			</div>
 			<div className="settings-button">
-				<button onClick={handleOnMenuClick}>
+				<button 
+					onClick={handleOnMenuClick}
+					className={isSettingsOpen ? 'focused' : ''}
+				>
 					<MenuIcon/>
 				</button>
+				{
+					isSettingsOpen
+						?	(
+							<SettingsPopup onLogout={onLogout}/>
+						)
+						: ''
+				}
 			</div>
 		</div>
 	);

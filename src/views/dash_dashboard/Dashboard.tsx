@@ -8,7 +8,10 @@ export const Dashboard = (props) => {
 
 	return (
 		<div className="dashboard-container">
-			<HeaderBar userConfigData={userConfigData}/>
+			<HeaderBar 
+				userConfigData={userConfigData}
+				onLogout={props.onLogout}
+			/>
 			<DashOverview/>
 		</div>
 	)

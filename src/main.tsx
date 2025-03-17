@@ -7,15 +7,6 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { AuthProvider, useAuth } from './auth'
 
-// const router = createRouter({
-//   routeTree,
-//   defaultPreload: 'intent',
-//   scrollRestoration: true,
-//   context: {
-//     auth: undefined!, // This will be set after we wrap the app in an AuthProvider
-//   },
-// })
-
 // Create a new router instance
 const router = createRouter({ 
   routeTree,
@@ -43,6 +34,5 @@ createRoot(document.getElementById('root')!).render(
     <AuthProvider>
       <InnerApp/>
     </AuthProvider>
-    <RouterProvider router={router} />
   </StrictMode>,
 );

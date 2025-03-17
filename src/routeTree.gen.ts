@@ -8,14 +8,28 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AboutImport } from './routes/about'
-import { Route as SessionIdHomeImport } from './routes/$sessionId/home'
+import { Route as IndexImport } from './routes/index'
+import { Route as AuthAuthImport } from './routes/auth/_auth'
+import { Route as AuthSessionIdHomeImport } from './routes/auth/$sessionId/home'
+
+// Create Virtual Routes
+
+const AuthImport = createFileRoute('/auth')()
 
 // Create/Update Routes
+
+const AuthRoute = AuthImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/login',
@@ -29,16 +43,34 @@ const AboutRoute = AboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SessionIdHomeRoute = SessionIdHomeImport.update({
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthAuthRoute = AuthAuthImport.update({
+  id: '/_auth',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSessionIdHomeRoute = AuthSessionIdHomeImport.update({
   id: '/$sessionId/home',
   path: '/$sessionId/home',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AuthRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -53,56 +85,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/$sessionId/home': {
-      id: '/$sessionId/home'
-      path: '/$sessionId/home'
-      fullPath: '/$sessionId/home'
-      preLoaderRoute: typeof SessionIdHomeImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
+    }
+    '/auth/_auth': {
+      id: '/auth/_auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthAuthImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/$sessionId/home': {
+      id: '/auth/$sessionId/home'
+      path: '/$sessionId/home'
+      fullPath: '/auth/$sessionId/home'
+      preLoaderRoute: typeof AuthSessionIdHomeImport
+      parentRoute: typeof AuthImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AuthRouteChildren {
+  AuthAuthRoute: typeof AuthAuthRoute
+  AuthSessionIdHomeRoute: typeof AuthSessionIdHomeRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthAuthRoute: AuthAuthRoute,
+  AuthSessionIdHomeRoute: AuthSessionIdHomeRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/$sessionId/home': typeof SessionIdHomeRoute
+  '/auth': typeof AuthAuthRoute
+  '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/$sessionId/home': typeof SessionIdHomeRoute
+  '/auth': typeof AuthAuthRoute
+  '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/$sessionId/home': typeof SessionIdHomeRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/auth/_auth': typeof AuthAuthRoute
+  '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/about' | '/login' | '/$sessionId/home'
+  fullPaths: '/' | '/about' | '/login' | '/auth' | '/auth/$sessionId/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/login' | '/$sessionId/home'
-  id: '__root__' | '/about' | '/login' | '/$sessionId/home'
+  to: '/' | '/about' | '/login' | '/auth' | '/auth/$sessionId/home'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/login'
+    | '/auth'
+    | '/auth/_auth'
+    | '/auth/$sessionId/home'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
-  SessionIdHomeRoute: typeof SessionIdHomeRoute
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
-  SessionIdHomeRoute: SessionIdHomeRoute,
+  AuthRoute: AuthRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -115,10 +189,14 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/about",
         "/login",
-        "/$sessionId/home"
+        "/auth"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/about": {
       "filePath": "about.tsx"
@@ -126,8 +204,20 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
-    "/$sessionId/home": {
-      "filePath": "$sessionId/home.tsx"
+    "/auth": {
+      "filePath": "auth",
+      "children": [
+        "/auth/_auth",
+        "/auth/$sessionId/home"
+      ]
+    },
+    "/auth/_auth": {
+      "filePath": "auth/_auth.tsx",
+      "parent": "/auth"
+    },
+    "/auth/$sessionId/home": {
+      "filePath": "auth/$sessionId/home.tsx",
+      "parent": "/auth"
     }
   }
 }

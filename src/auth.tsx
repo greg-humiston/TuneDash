@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import { sleep } from './utils.ts';
-
 export interface AuthContext {
   isAuthenticated: boolean
   login: (username: string) => Promise<void>
@@ -30,15 +28,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = !!user
 
   const logout = React.useCallback(async () => {
-    await sleep(250)
-
     setStoredUser(null)
     setUser(null)
   }, [])
 
   const login = React.useCallback(async (username: string) => {
-    await sleep(500)
-
     setStoredUser(username)
     setUser(username)
   }, [])
@@ -54,10 +48,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export function useAuth() {
+export const useAuth = () => {
   const context = React.useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')
   }
   return context
-}
+};

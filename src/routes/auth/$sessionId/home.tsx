@@ -1,0 +1,26 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { Dashboard } from '../../../views/dash_dashboard/Dashboard';
+import { useAuth } from '../../../auth';
+
+const HomeRouteComponent = () => {
+  const auth = useAuth();
+  const navigate = Route.useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await auth.logout();
+      await navigate({ to: '/' });
+    } catch (e) {
+      console.log('error logging out:', e);
+    }
+  };
+
+  return (
+    <Dashboard onLogout={handleLogout}/>
+  );
+};
+
+export const Route = createFileRoute('/auth/$sessionId/home')({
+  component: HomeRouteComponent
+});
+
