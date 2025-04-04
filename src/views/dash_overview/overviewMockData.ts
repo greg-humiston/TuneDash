@@ -1,4 +1,88 @@
 
+// additional tab data: rounds, standing, chat
+export type CurrentDashData = DashData | {
+	currentState: string; // song-selection, voting
+	userList: string[];
+	adminUser: string;
+	// rounds tab
+	rounds: RoundsData;
+
+	// standings tab
+	standings: Standings;
+
+	// chat tab
+	chatId: Chat;
+};
+
+export type Submission = {
+	submissionId: string;
+	userId: string;
+	submissionValue: string;
+};
+
+export type SubmissionList = {
+	submissionListId: string;
+	submissionList: Submission[];
+}
+
+export type Round = {
+	roundId: string;
+	roundTitle: string;
+	roundDescription: string;
+};
+
+export type CurrentRound = Round | {
+	roundDueDate: string;
+	roundStandings: Standings;
+	submissionList: SubmissionList; 	
+};
+
+export type FutureRound = Round | {
+	roundStartDate: string;
+};
+
+export type CompletedRound = Round | {
+	roundCompletionDate: string;
+	roundStandings: Standings;
+	submissionList: SubmissionList; 
+};
+
+export type RoundsData = {
+	roundsDataId: string;
+	currentRound: CurrentRound;
+	futureRounds: FutureRound[];
+	completedRounds: CompletedRound[];
+};
+
+export type Standings = {
+	standingsId: string;
+	standingsUserList: StandingsUser[];
+};
+
+export type StandingsUser = {
+	userId: string;
+	standingsId: string;
+};
+
+export type Chat = {
+	chatId: string;
+	chatMessageList: ChatMessage[];
+};
+
+export type ChatMessage = {
+	messageId: string;
+	chatId: string;
+	userId: string;
+	messageDateAndTime: string;
+	messageEmojiList: string[]; // an array of svg strings?
+	messageValue: string;
+};
+
+export type NewMessage = {
+	userId: string;
+	messageValue: string;
+};
+
 export type DashData = {
 	dashId: string;
   title: string;
