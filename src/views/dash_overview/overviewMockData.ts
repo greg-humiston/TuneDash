@@ -11,7 +11,7 @@ export type CurrentDashData = DashData | {
 	standings: Standings;
 
 	// chat tab
-	chatId: Chat;
+	chat: Chat;
 };
 
 export type Submission = {
@@ -31,17 +31,17 @@ export type Round = {
 	roundDescription: string;
 };
 
-export type CurrentRound = Round | {
+export type CurrentRound = Round & {
 	roundDueDate: string;
 	roundStandings: Standings;
 	submissionList: SubmissionList; 	
 };
 
-export type FutureRound = Round | {
+export type FutureRound = Round & {
 	roundStartDate: string;
 };
 
-export type CompletedRound = Round | {
+export type CompletedRound = Round & {
 	roundCompletionDate: string;
 	roundStandings: Standings;
 	submissionList: SubmissionList; 
@@ -61,7 +61,7 @@ export type Standings = {
 
 export type StandingsUser = {
 	userId: string;
-	standingsId: string;
+	scoreValue: number;
 };
 
 export type Chat = {
@@ -71,10 +71,9 @@ export type Chat = {
 
 export type ChatMessage = {
 	messageId: string;
-	chatId: string;
 	userId: string;
 	messageDateAndTime: string;
-	messageEmojiList: string[]; // an array of svg strings?
+	// messageEmojiList: string[]; // an array of svg strings?
 	messageValue: string;
 };
 
@@ -103,6 +102,168 @@ export type DashData = {
   hasVotesBeenSubmitted: boolean;
 };
 
+export const MOCK_USER_LIST = [
+	'1234',
+	'5678',
+	'9101112'
+];
+
+export const MOCK_ADMIN_USER = '321';
+
+
+export const MOCK_STANDINGS_USER_LIST: StandingsUser[] = [
+	{
+		userId: '111',
+		scoreValue: 150
+	},
+	{
+		userId: '112',
+		scoreValue: 140
+	},	
+	{
+		userId: '101',
+		scoreValue: 130
+	},	
+	{
+		userId: '11',
+		scoreValue: 110
+	},
+];
+
+export const MOCK_STANDINGS: Standings = {
+	standingsId: '321',
+	standingsUserList: MOCK_STANDINGS_USER_LIST
+};
+
+export const MOCK_SUBMISSION_LIST: Submission[] = [
+	{
+		submissionId: '111',
+		userId: '111',
+		submissionValue: ''
+	},
+	{
+		submissionId: '112',
+		userId: '112',
+		submissionValue: ''
+	},
+	{
+		submissionId: '101',
+		userId: '101',
+		submissionValue: ''
+	},
+	{
+		submissionId: '11',
+		userId: '11',
+		submissionValue: ''
+	}
+];
+
+export const MOCK_SUBMISSION_LIST_DATA: SubmissionList = {
+	submissionListId: '5',
+	submissionList: MOCK_SUBMISSION_LIST
+};
+
+export const MOCK_CURRENT_ROUND: CurrentRound = {
+	roundId: '666',
+	roundTitle: 'hello world',
+	roundDescription: 'hello world oh lordy',
+	roundDueDate: '11/16/2026 03:44:05',
+	roundStandings: MOCK_STANDINGS,
+	submissionList: MOCK_SUBMISSION_LIST_DATA
+};
+
+export const MOCK_FUTURE_ROUNDS: FutureRound[] = [
+	{
+		roundId: '666',
+		roundTitle: 'hello world',
+		roundDescription: 'hello world oh lordy',
+		roundStartDate: '11/16/2026 03:44:05'
+	},
+	{
+		roundId: '777',
+		roundTitle: 'hello tour',
+		roundDescription: 'hello world oh lordy',
+		roundStartDate: '11/16/2026 03:44:05'
+	},
+	{
+		roundId: '888',
+		roundTitle: 'hello chair',
+		roundDescription: 'hello world oh lordy',
+		roundStartDate: '11/16/2026 03:44:05'
+	}
+];
+
+export const MOCK_COMPLETED_ROUNDS: CompletedRound[] = [
+	{
+		roundId: '666',
+		roundTitle: 'hello world',
+		roundDescription: 'hello world oh lordy',
+		roundCompletionDate: '11/16/2026 03:44:05',
+		roundStandings: MOCK_STANDINGS,
+		submissionList: MOCK_SUBMISSION_LIST_DATA
+	},
+	{
+		roundId: '777',
+		roundTitle: 'hello world',
+		roundDescription: 'hello world oh lordy',
+		roundCompletionDate: '11/16/2026 03:44:05',
+		roundStandings: MOCK_STANDINGS,
+		submissionList: MOCK_SUBMISSION_LIST_DATA
+	},
+	{
+		roundId: '888',
+		roundTitle: 'hello world',
+		roundDescription: 'hello world oh lordy',
+		roundCompletionDate: '11/16/2026 03:44:05',
+		roundStandings: MOCK_STANDINGS,
+		submissionList: MOCK_SUBMISSION_LIST_DATA
+	},
+];
+
+export const MOCK_ROUNDS: RoundsData = {
+	roundsDataId: '321',
+	currentRound: MOCK_CURRENT_ROUND,
+	futureRounds:  MOCK_FUTURE_ROUNDS,
+	completedRounds: MOCK_COMPLETED_ROUNDS
+};
+
+export const MOCK_CHAT_MESSAGE_LIST: ChatMessage[] = [
+	{
+		messageId: '123',
+		userId: '112',
+		messageDateAndTime: '11/16/1990 05:55:30 am',
+		messageValue: 'this is a test'
+		// messageEmojiList
+	},
+	{
+		messageId: '123',
+		userId: '111',
+		messageDateAndTime: '11/16/1990 05:55:40 am',
+		messageValue: 'are you sure?'
+		// messageEmojiList
+	},
+	{
+		messageId: '123',
+		userId: '112',
+		messageDateAndTime: '11/16/1990 05:55:50 am',
+		messageValue: 'yes!'
+		// messageEmojiList
+	}
+];
+
+export const MOCK_CHAT: Chat = {
+	chatId: '123',
+	chatMessageList: MOCK_CHAT_MESSAGE_LIST
+};
+
+export const MOCK_CURRENT_DASH_DATA: CurrentDashData = {
+	currentState: 'song-selection', // || voting
+	userList: MOCK_USER_LIST,
+	adminUser: MOCK_ADMIN_USER,
+	rounds: MOCK_ROUNDS,
+	standings: MOCK_STANDINGS,
+	chat: MOCK_CHAT
+};
 
 export const MOCK_CURRENT_DASH_LIST: DashData[] = [
 	{
