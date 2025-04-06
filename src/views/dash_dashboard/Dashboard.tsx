@@ -1,6 +1,5 @@
 
-import { DashOverview } from "../dash_overview/DashOverview";
-import { MOCK_USER_CONFIG_DATA } from "../dash_overview/overviewMockData";
+import { MOCK_USER_CONFIG_DATA } from "../dash_home/overviewMockData";
 import { HeaderBar } from "./HeaderBar";
 
 export const Dashboard = (props) => {
@@ -12,7 +11,7 @@ export const Dashboard = (props) => {
 				userConfigData={userConfigData}
 				onLogout={props.onLogout}
 			/>
-			<DashOverview/>
+			{props.children}
 		</div>
 	)
 };

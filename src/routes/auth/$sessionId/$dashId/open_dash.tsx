@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
-import { MOCK_OPEN_DASH_LIST } from '../../../../views/dash_overview/overviewMockData';
+import { MOCK_OPEN_DASH_LIST } from '../../../../views/dash_home/overviewMockData';
 
 const RouteComponent = () => {
   const params = Route.useParams();

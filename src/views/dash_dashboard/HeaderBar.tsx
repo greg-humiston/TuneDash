@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MenuIcon from '../../assets/menu_white.svg?react';
 import '../../App.css';
+import { IconButton } from '../../components/IconButton';
 
 const SettingsPopup = (props) => {
 	return (
@@ -44,12 +45,11 @@ export const HeaderBar = (props) => {
 					</a>
 				</div>
 				<div className="settings-button">
-					<button 
-						onClick={handleOnMenuClick}
+					<IconButton 
 						className={isSettingsOpen ? 'focused' : ''}
-					>
-						<MenuIcon/>
-					</button>
+						Icon={MenuIcon}
+						onClick={handleOnMenuClick}
+					/>
 					{
 						isSettingsOpen
 							?	(

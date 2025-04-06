@@ -1,59 +1,103 @@
-.dashboard-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	overflow-x: hidden;
+.overview-container {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid black;
+    align-self: center;
+    width: 80%;
 }
 
-.dashes-container,
-.dashes-container h2 {
-	color: rgb(177, 177, 177);
-	margin-bottom: 0px;
-	margin-top: 0px;
+.current-dash-container {
+    width: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
-.dashes-header {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	background-color: black;
-	border-radius: 5px;
+.dash-header-container {
 }
 
-.dashes-header label {
-	color: rgb(255, 255, 255);
+.dash-header-background {
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.dashes-container {
-	border: 1px solid white;
-	border-radius: 5px;
-	margin: 25px;
-	width: 55%;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
+.dash-badge {
+	padding: 4px 8px;
+	border-radius: 9999px;
+	font-size: 25px;
+	font-weight: 500;
+	color: white;
+    margin-right: 5px;
+    border: 1px solid white;
 }
 
-.dashes-header > div {
-	padding: 20px;
+.dash-badge-mode {
+	background-color: #2563eb;
 }
 
-.dashes-viewing-options {
-	display: flex;
-	align-items: center;
+.dash-badge-private {
+	background-color: #4b5563;
 }
 
-.dashes-viewing-options > a {
-	margin-left: 10px;
-	margin-right: 10px;
-	width: auto;
+.dash-header-title {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
 }
 
-.dash-items {
-	display: flex;
-	align-items: center;
-	height: 100%;
-	padding: 10px;
-	overflow-x: auto;
-	overflow-y: hidden;
+.dash-header-title > label {
+    font-size: 45px;
+}
+
+.header-settings-button {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.dash-description {
+    padding: 25px;
+    border-bottom: 1px solid black;
+    display: flex;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.dash-description > label {
+    font-size: 25px;
+}
+
+.tab-list-container {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tab-list-container .tab {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: 1px solid black;
+}
+
+.tab-list-container .tab,
+.tab-list-container .tab > label {
+    cursor: pointer;
+}
+
+.rounds-container {
+    height: 500px;
+}
+
+.standings-container {
+    height: 500px;
+}
+
+.chat-container {
+    height: 500px;
 }

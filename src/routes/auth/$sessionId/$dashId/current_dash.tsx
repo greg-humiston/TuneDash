@@ -1,12 +1,15 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { MOCK_CURRENT_DASH_LIST } from '../../../../views/dash_overview/overviewMockData';
+import { MOCK_CURRENT_DASH_DATA } from '../../../../views/dash_home/overviewMockData';
+import SettingsIcon from '../../../../assets/settings.svg';
+import { Dashboard } from '../../../../views/dash_dashboard/Dashboard';
+import { DashOverview } from '../../../../views/dash_overview/DashOverview';
 
 const RouteComponent = () => {
-  const params = Route.useParams();
+  // const params = Route.useParams();
   const navigate = useNavigate();
 
   // TODO: replace with query
-  const dashData = MOCK_CURRENT_DASH_LIST.find((data) => data?.dashId === params.dashId);
+  const dashData = MOCK_CURRENT_DASH_DATA;
 
   if (!dashData) {
     const handleReturnTohome = () => {
@@ -22,11 +25,9 @@ const RouteComponent = () => {
   }
 
   return (
-    <div className="current-dash-container">
-    {
-      JSON.stringify(dashData)
-    }
-    </div>
+    <Dashboard>
+      <DashOverview dashData={dashData}/>
+    </Dashboard>
   );
 };
 

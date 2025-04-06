@@ -1,6 +1,6 @@
 
 // additional tab data: rounds, standing, chat
-export type CurrentDashData = DashData | {
+export type CurrentDashData = DashData & {
 	currentState: string; // song-selection, voting
 	userList: string[];
 	adminUser: string;
@@ -102,10 +102,33 @@ export type DashData = {
   hasVotesBeenSubmitted: boolean;
 };
 
-export const MOCK_USER_LIST = [
-	'1234',
-	'5678',
-	'9101112'
+export type User = {
+	userId: string;
+	userName: string;
+	userImageUrl: string;
+};
+
+export const MOCK_USER_LIST: User[] = [
+	{
+		userId: '111',
+		userName: 'ya boi',
+		userImageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmaAxnKqZgR2HlR_K0IIp-nmeInIsax87EoA&s'
+	},
+	{
+		userId: '112',
+		userName: 'ya boim2',
+		userImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/SpongeBob_SquarePants_character.png'
+	},
+	{
+		userId: '101',
+		userName: 'ya boi3',
+		userImageUrl: 'https://helloartsy.com/wp-content/uploads/cartoons/how-to-draw-patrick-star/how-to-draw-patrick-star.jpg'
+	},
+	{
+		userId: '11',
+		userName: 'ya b4oi',
+		userImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Sandy_Cheeks_character.png'
+	}
 ];
 
 export const MOCK_ADMIN_USER = '321';
@@ -257,6 +280,23 @@ export const MOCK_CHAT: Chat = {
 };
 
 export const MOCK_CURRENT_DASH_DATA: CurrentDashData = {
+	dashId: '123',
+	title: 'Jamz of the month 24-25',
+	description: 'The point of this league is to share what you\'ve been vibing to this month. It doesn\'t have to be a new release or anything, just whatever you\'ve been stuck on enjoying. Also, it should be fun. No negative vibes allowed. Songs are due on the last of the month by 11:30 p.m. voting is due by 6:00 p.m. on the 7th of the following month. At the end of each month we\'ll have a nice lil playlist to kick off the next month. I think it\'ll be a fun way to share what we\'ve all been listening to! Thanks.',
+	dashMode: 'Accelerated',
+	isDownVotingEnabled: false,
+	dashArt: 'https://api.time.com/wp-content/uploads/2019/08/caveman-spongebob-spongegar.png?w=560',
+	isListed: false,
+	totalRounds: 6,
+	songsPerRound: 3,
+	numberOfPlayers: 13,
+	maxNumberOfPlayers: 22,
+	timeWhenCreated: '6 hours',
+	timeWhenVotesDue: '8 hours',
+	timeWhenSubmissionsDue: '12 hours',
+	maxVotesAllowed: 5,
+	maxDownVotesAllowed: 0,
+	hasVotesBeenSubmitted: true,
 	currentState: 'song-selection', // || voting
 	userList: MOCK_USER_LIST,
 	adminUser: MOCK_ADMIN_USER,
@@ -358,6 +398,7 @@ export const MOCK_USER_CONFIG_DATA: UserConfigData =  {
 };
 
 export default {
+	MOCK_CURRENT_DASH_DATA,
 	MOCK_CURRENT_DASH_LIST,
 	MOCK_OPEN_DASH_LIST,
 	MOCK_USER_CONFIG_DATA

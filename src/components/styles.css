@@ -48,10 +48,8 @@
 }
 
 .dash-badges {
-	position: absolute;
 	top: 8px;
 	right: 8px;
-	display: flex;
 	gap: 4px;
 }
 
@@ -136,4 +134,28 @@
 .dash-timeline-value {
 	color: #6b7280;
 	margin-top: 2px;
+}
+
+.user-list {
+	width: 100%;
+	display: flex;
+	max-width: 100%;
+	overflow-x: auto;
+	border-bottom: 1px solid black;
+}
+
+.user-list .user-item {
+	margin: 15px;
+	width: 100px;
+	height: 100px;
+}
+
+.user-list .user-item > img {
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+}
+
+.dash-modifications {
+	display: flex;
 }

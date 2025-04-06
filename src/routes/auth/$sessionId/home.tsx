@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Dashboard } from '../../../views/dash_dashboard/Dashboard';
 import { useAuth } from '../../../auth';
+import { DashOverview } from '../../../views/dash_home/DashOverview';
 
 const HomeRouteComponent = () => {
   const auth = useAuth();
@@ -16,7 +17,9 @@ const HomeRouteComponent = () => {
   };
 
   return (
-    <Dashboard onLogout={handleLogout}/>
+    <Dashboard onLogout={handleLogout}>
+      <DashOverview/>  
+    </Dashboard>
   );
 };
 
