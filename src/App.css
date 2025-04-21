@@ -201,6 +201,11 @@ a:hover {
 	flex: 1;
 }
 
+.settings-container button.disabled,
+.settings-container button.disabled:hover {
+	background-color: #c3c3c3;
+}
+
 .logout-button-container {
 	justify-self: flex-end;
 	display: flex;
@@ -294,10 +299,6 @@ a:hover {
 	height: 500px;
 	display: flex;
 	flex-direction: column;
-}
-
-.settings-container {
-	flex: 1;
 }
 
 .logout-button-container {

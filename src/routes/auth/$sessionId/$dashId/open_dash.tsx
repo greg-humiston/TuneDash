@@ -1,13 +1,18 @@
-import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
+import { createFileRoute, useLocation, useNavigate, useParams } from '@tanstack/react-router'
 import { MOCK_OPEN_DASH_LIST } from '../../../../views/dash_home/overviewMockData';
 
 const RouteComponent = () => {
   const params = Route.useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const dashData = MOCK_OPEN_DASH_LIST.find((data) => data?.dashId === params.dashId);
 
   if (!dashData) {
     const handleReturnTohome = () => {
+      debugger;
+      if (location.pathName?.includes('home')) {
+        return;
+      }
       navigate({ to: '../../home' });
     };
 

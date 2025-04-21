@@ -34,7 +34,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   errorComponent: (props) => {
     return (
       <div>
-        <label>{props.error}</label>
+        <label>{JSON.stringify(props.error)}</label>
       </div>
     );
   }

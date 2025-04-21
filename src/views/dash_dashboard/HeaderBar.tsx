@@ -2,12 +2,28 @@ import { useState } from 'react';
 import MenuIcon from '../../assets/menu_white.svg?react';
 import '../../App.css';
 import { IconButton } from '../../components/IconButton';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 
 const SettingsPopup = (props) => {
+	const location = useLocation();
+  	const navigate = useNavigate();
+
+	const handleNavigateHome = () => {
+		navigate({ to: `../../home` });
+	};
+
+	const isHomeButtonDisabled = location.pathname?.includes('home');
+	const homeButtonClassName = isHomeButtonDisabled ? 'disabled' : '';
 	return (
 		<div className="settings-popup">
 			<div className="settings-container">
-
+				<button 
+					onClick={handleNavigateHome}
+					disabled={isHomeButtonDisabled}
+					className={homeButtonClassName}
+				>
+					Home
+				</button>
 			</div>
 			<div className="logout-button-container">
 				<button onClick={props.onLogout}>Logout</button>
