@@ -4,6 +4,21 @@ import '../../App.css';
 import { IconButton } from '../../components/IconButton';
 import { useLocation, useNavigate } from '@tanstack/react-router';
 
+const SettingsPopupButton = (props) => {
+	const { text, onClick, className, isDisabled } = props;
+	return (
+		<div className="settings-popup-button">
+			<button 
+				onClick={onClick}
+				disabled={isDisabled}
+				className={className}
+			>
+				{text}
+			</button>
+		</div>
+	);
+};
+
 const SettingsPopup = (props) => {
 	const location = useLocation();
   	const navigate = useNavigate();
@@ -18,26 +33,33 @@ const SettingsPopup = (props) => {
 
 	const isHomeButtonDisabled = location.pathname?.includes('home');
 	const homeButtonClassName = isHomeButtonDisabled ? 'disabled' : '';
+
+	const isCreateDashButtonDisabled = location.pathname?.includes('create_dash');
+	const createDashButtonClassName = isCreateDashButtonDisabled ? 'disabled' : '';
+
 	return (
 		<div className="settings-popup">
 			<div className="settings-container">
-				<button 
+				<SettingsPopupButton
 					onClick={handleNavigateHome}
-					disabled={isHomeButtonDisabled}
+					isDisabled={isHomeButtonDisabled}
 					className={homeButtonClassName}
-				>
-					Home
-				</button>
-				<button 
+					text="Home"
+				/>
+				<SettingsPopupButton 
 					onClick={handleNavigateCreateDash}
-					disabled={isHomeButtonDisabled}
-					className={homeButtonClassName}
-				>
-					Create Dash
-				</button>
+					isDisabled={isCreateDashButtonDisabled}
+					className={createDashButtonClassName}
+					text="Create Dash"
+				/>
 			</div>
 			<div className="logout-button-container">
-				<button onClick={props.onLogout}>Logout</button>
+				<SettingsPopupButton
+					onClick={props.onLogout}
+					disabled={false}
+					className={homeButtonClassName}
+					text="Logout"
+				/>			
 			</div>
 		</div>
 	);

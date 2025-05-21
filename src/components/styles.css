@@ -159,3 +159,65 @@
 .dash-modifications {
 	display: flex;
 }
+
+.create-dash-container {
+	display: flex;
+	flex-direction: column;
+	max-width: 50%;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	font-family: system-ui, -apple-system, sans-serif;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.create-dash-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: rgb(72, 72, 72);
+	color: white;
+	border-radius: 8px 8px 0 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.create-dash-header > label {
+	color: white;
+}
+
+.create-dash-body {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	background-color: white;
+	border-radius: 0 0 8px 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-dash-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f3f4f6;
+	border-radius: 0 0 8px 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #374151;
+}
+
+.create-dash-form-item {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 16px;
+}
+
+.create-dash-form-item-checkbox {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin-bottom: 16px;
+	vertical-align: middle;
+}
