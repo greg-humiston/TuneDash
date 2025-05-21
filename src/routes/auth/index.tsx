@@ -7,22 +7,7 @@ import {
 
 import { useAuth } from '../../auth'
 
-export const Route = createFileRoute('/auth/')({
-  beforeLoad: ({ context, location }) => {
-    if (!context.auth.isAuthenticated) {
-      throw redirect({
-        to: '/login',
-        search: {
-          redirect: location.href,
-        },
-      })
-    }
-  },
-  component: AuthLayout,
-  notFoundComponent: (props) => props.data
-})
-
-function AuthLayout() {
+const AuthLayout = () => {
   const router = useRouter();
   const navigate = Route.useNavigate();
   const auth = useAuth();
@@ -55,4 +40,21 @@ function AuthLayout() {
       <Outlet/>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute('/auth/')({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: '/login',
+        search: {
+          redirect: location.href,
+        },
+      })
+    }
+  },
+  component: AuthLayout,
+  notFoundComponent: (props) => props.data
+})
+
+

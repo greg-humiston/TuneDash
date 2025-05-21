@@ -8,8 +8,6 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
@@ -17,22 +15,11 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
-import { Route as AuthAuthImport } from './routes/auth/_auth'
 import { Route as AuthSessionIdHomeImport } from './routes/auth/$sessionId/home'
 import { Route as AuthSessionIdDashIdOpendashImport } from './routes/auth/$sessionId/$dashId/open_dash'
 import { Route as AuthSessionIdDashIdCurrentdashImport } from './routes/auth/$sessionId/$dashId/current_dash'
 
-// Create Virtual Routes
-
-const AuthImport = createFileRoute('/auth')()
-
 // Create/Update Routes
-
-const AuthRoute = AuthImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/login',
@@ -53,34 +40,29 @@ const IndexRoute = IndexImport.update({
 } as any)
 
 const AuthIndexRoute = AuthIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthRoute,
-} as any)
-
-const AuthAuthRoute = AuthAuthImport.update({
-  id: '/_auth',
-  getParentRoute: () => AuthRoute,
+  id: '/auth/',
+  path: '/auth/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const AuthSessionIdHomeRoute = AuthSessionIdHomeImport.update({
-  id: '/$sessionId/home',
-  path: '/$sessionId/home',
-  getParentRoute: () => AuthRoute,
+  id: '/auth/$sessionId/home',
+  path: '/auth/$sessionId/home',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const AuthSessionIdDashIdOpendashRoute =
   AuthSessionIdDashIdOpendashImport.update({
-    id: '/$sessionId/$dashId/open_dash',
-    path: '/$sessionId/$dashId/open_dash',
-    getParentRoute: () => AuthRoute,
+    id: '/auth/$sessionId/$dashId/open_dash',
+    path: '/auth/$sessionId/$dashId/open_dash',
+    getParentRoute: () => rootRoute,
   } as any)
 
 const AuthSessionIdDashIdCurrentdashRoute =
   AuthSessionIdDashIdCurrentdashImport.update({
-    id: '/$sessionId/$dashId/current_dash',
-    path: '/$sessionId/$dashId/current_dash',
-    getParentRoute: () => AuthRoute,
+    id: '/auth/$sessionId/$dashId/current_dash',
+    path: '/auth/$sessionId/$dashId/current_dash',
+    getParentRoute: () => rootRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -108,77 +90,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/_auth': {
-      id: '/auth/_auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthAuthImport
-      parentRoute: typeof AuthRoute
-    }
     '/auth/': {
       id: '/auth/'
-      path: '/'
-      fullPath: '/auth/'
+      path: '/auth'
+      fullPath: '/auth'
       preLoaderRoute: typeof AuthIndexImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
     }
     '/auth/$sessionId/home': {
       id: '/auth/$sessionId/home'
-      path: '/$sessionId/home'
+      path: '/auth/$sessionId/home'
       fullPath: '/auth/$sessionId/home'
       preLoaderRoute: typeof AuthSessionIdHomeImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
     }
     '/auth/$sessionId/$dashId/current_dash': {
       id: '/auth/$sessionId/$dashId/current_dash'
-      path: '/$sessionId/$dashId/current_dash'
+      path: '/auth/$sessionId/$dashId/current_dash'
       fullPath: '/auth/$sessionId/$dashId/current_dash'
       preLoaderRoute: typeof AuthSessionIdDashIdCurrentdashImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
     }
     '/auth/$sessionId/$dashId/open_dash': {
       id: '/auth/$sessionId/$dashId/open_dash'
-      path: '/$sessionId/$dashId/open_dash'
+      path: '/auth/$sessionId/$dashId/open_dash'
       fullPath: '/auth/$sessionId/$dashId/open_dash'
       preLoaderRoute: typeof AuthSessionIdDashIdOpendashImport
-      parentRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface AuthRouteChildren {
-  AuthAuthRoute: typeof AuthAuthRoute
-  AuthIndexRoute: typeof AuthIndexRoute
-  AuthSessionIdHomeRoute: typeof AuthSessionIdHomeRoute
-  AuthSessionIdDashIdCurrentdashRoute: typeof AuthSessionIdDashIdCurrentdashRoute
-  AuthSessionIdDashIdOpendashRoute: typeof AuthSessionIdDashIdOpendashRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthAuthRoute: AuthAuthRoute,
-  AuthIndexRoute: AuthIndexRoute,
-  AuthSessionIdHomeRoute: AuthSessionIdHomeRoute,
-  AuthSessionIdDashIdCurrentdashRoute: AuthSessionIdDashIdCurrentdashRoute,
-  AuthSessionIdDashIdOpendashRoute: AuthSessionIdDashIdOpendashRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/auth': typeof AuthAuthRoute
-  '/auth/': typeof AuthIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
   '/auth/$sessionId/$dashId/current_dash': typeof AuthSessionIdDashIdCurrentdashRoute
   '/auth/$sessionId/$dashId/open_dash': typeof AuthSessionIdDashIdOpendashRoute
@@ -199,8 +148,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
-  '/auth': typeof AuthRouteWithChildren
-  '/auth/_auth': typeof AuthAuthRoute
   '/auth/': typeof AuthIndexRoute
   '/auth/$sessionId/home': typeof AuthSessionIdHomeRoute
   '/auth/$sessionId/$dashId/current_dash': typeof AuthSessionIdDashIdCurrentdashRoute
@@ -214,7 +161,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/auth'
-    | '/auth/'
     | '/auth/$sessionId/home'
     | '/auth/$sessionId/$dashId/current_dash'
     | '/auth/$sessionId/$dashId/open_dash'
@@ -232,8 +178,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/login'
-    | '/auth'
-    | '/auth/_auth'
     | '/auth/'
     | '/auth/$sessionId/home'
     | '/auth/$sessionId/$dashId/current_dash'
@@ -245,14 +189,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
-  AuthRoute: typeof AuthRouteWithChildren
+  AuthIndexRoute: typeof AuthIndexRoute
+  AuthSessionIdHomeRoute: typeof AuthSessionIdHomeRoute
+  AuthSessionIdDashIdCurrentdashRoute: typeof AuthSessionIdDashIdCurrentdashRoute
+  AuthSessionIdDashIdOpendashRoute: typeof AuthSessionIdDashIdOpendashRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
-  AuthRoute: AuthRouteWithChildren,
+  AuthIndexRoute: AuthIndexRoute,
+  AuthSessionIdHomeRoute: AuthSessionIdHomeRoute,
+  AuthSessionIdDashIdCurrentdashRoute: AuthSessionIdDashIdCurrentdashRoute,
+  AuthSessionIdDashIdOpendashRoute: AuthSessionIdDashIdOpendashRoute,
 }
 
 export const routeTree = rootRoute
@@ -268,7 +218,10 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/login",
-        "/auth"
+        "/auth/",
+        "/auth/$sessionId/home",
+        "/auth/$sessionId/$dashId/current_dash",
+        "/auth/$sessionId/$dashId/open_dash"
       ]
     },
     "/": {
@@ -280,35 +233,17 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
-    "/auth": {
-      "filePath": "auth",
-      "children": [
-        "/auth/_auth",
-        "/auth/",
-        "/auth/$sessionId/home",
-        "/auth/$sessionId/$dashId/current_dash",
-        "/auth/$sessionId/$dashId/open_dash"
-      ]
-    },
-    "/auth/_auth": {
-      "filePath": "auth/_auth.tsx",
-      "parent": "/auth"
-    },
     "/auth/": {
-      "filePath": "auth/index.tsx",
-      "parent": "/auth"
+      "filePath": "auth/index.tsx"
     },
     "/auth/$sessionId/home": {
-      "filePath": "auth/$sessionId/home.tsx",
-      "parent": "/auth"
+      "filePath": "auth/$sessionId/home.tsx"
     },
     "/auth/$sessionId/$dashId/current_dash": {
-      "filePath": "auth/$sessionId/$dashId/current_dash.tsx",
-      "parent": "/auth"
+      "filePath": "auth/$sessionId/$dashId/current_dash.tsx"
     },
     "/auth/$sessionId/$dashId/open_dash": {
-      "filePath": "auth/$sessionId/$dashId/open_dash.tsx",
-      "parent": "/auth"
+      "filePath": "auth/$sessionId/$dashId/open_dash.tsx"
     }
   }
 }

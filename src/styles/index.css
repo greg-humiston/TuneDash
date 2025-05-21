@@ -1,0 +1,199 @@
+/* DashDataView.css */
+/* Dark theme custom styles - Black and dark gray with white accents */
+
+.app-container {
+	overflow: hidden;
+}
+
+.dash-container {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 1px solid #333333;
+	overflow: auto;
+  margin-top: 20px;
+}
+
+/* Banner section */
+.banner-container {
+  position: relative;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: 1px solid #333333;
+}
+
+.badge-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.badge-purple {
+  background-color: #1a1a1a;
+  border-color: #7b2cbf;
+}
+
+.badge-blue {
+  background-color: #1a1a1a;
+  border-color: #2563eb;
+}
+
+.badge-green {
+  background-color: #1a1a1a;
+  border-color: #16a34a;
+}
+
+.badge-red {
+  background-color: #1a1a1a;
+  border-color: #dc2626;
+}
+
+.icon-inline {
+  margin-right: 4px;
+  color: #ffffff;
+}
+
+/* Header section */
+.header-section {
+  background-color: #121212;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid #333333;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dash-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+
+.dash-description {
+  color: #cccccc;
+  font-size: 16px;
+  margin: 20px;
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Info cards */
+.info-card {
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #333333;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.card-title-purple {
+  border-bottom: 2px solid #7b2cbf;
+  padding-bottom: 8px;
+}
+
+.card-title-blue {
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 8px;
+}
+
+.card-title-green {
+  border-bottom: 2px solid #16a34a;
+  padding-bottom: 8px;
+}
+
+/* Info lists */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333333;
+}
+
+.info-label {
+  color: #cccccc;
+  display: flex;
+  align-items: center;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Status indicators */
+.status-enabled {
+  color: #4ade80;
+}
+
+.status-disabled {
+  color: #f87171;
+}
+
+.status-pending {
+  color: #facc15;
+}
+
+/* Code container */
+.code-container {
+  background-color: #000000;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  border: 1px solid #333333;
+  color: #ffffff;
+}
