@@ -34,7 +34,6 @@ type NewDash = {
   title: string;
   description: string;
   dashMode: 'Accelerated' | string;
-  isDownVotingEnabled?: boolean;
   dashArt: string;
   isListed: boolean;
   totalRounds: number;
@@ -43,7 +42,6 @@ type NewDash = {
   maxNumberOfPlayers: number;
   maxVotesAllowed: number;
   maxDownVotesAllowed: number;
-  hasVotesBeenSubmitted: boolean;
   userList: string[];
   rounds: NewRound[];
 };
@@ -52,112 +50,138 @@ type CreateNewDashProps = {
 
 };
 
+const defaultDashState: NewDash = {
+    title: '',
+    description: '',
+    dashMode: '',
+    dashArt: '',
+    isListed: false,
+    totalRounds: 1,
+    songsPerRound: 3,
+    numberOfPlayers: 2, // 2 players needed by default
+    maxNumberOfPlayers: 2,
+    maxVotesAllowed: 3,
+    maxDownVotesAllowed: 0,
+    userList: [],
+    rounds: []
+};
+
 export const CreateNewDash = (props: CreateNewDashProps) => {
-    const [newDashState, setNewDashState] = useState({});
+    const [newDashState, setNewDashState] = useState(defaultDashState);
     const [enableDownvotes, setEnableDownvotes] = useState(false);
 
-    const handleFormChange = (data = {}) => {
+    const handleFormChange = (data: React.ChangeEvent<HTMLInputElement>) => {
+        const value = data.target.value;
+        const key = data.target.id;
+        // debugger;
         setNewDashState({
             ...newDashState,
-            ...data
+            [key]: value
         });
     };  
 
     return (
-        <div>
-        <div className="create-dash-container">
-            <div className="create-dash-header">
-                <label>Create New Dash</label>
-            </div>
-            <div className="create-dash-body">
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Dash Title:</label>
-                    </div>
-                    <div>
-                        <input id="title" value="" onChange={handleFormChange}/>
-                    </div>
+        <div className="create-dash-wrapper">
+            <div className="create-dash-container">
+                <div className="create-dash-header">
+                    <label>Create New Dash</label>
                 </div>
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Dash Description:</label>
+                <div className="create-dash-body">
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Dash Title:</label>
+                        </div>
+                        <div>
+                            <input id="title" value={newDashState?.title} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                    <div>
-                        <input id="description" value="" onChange={handleFormChange}/>
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Dash Description:</label>
+                        </div>
+                        <div>
+                            <input id="description" value={newDashState?.description} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                </div>
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Dash Art:</label>
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Dash Art:</label>
+                        </div>
+                        <div>
+                            <input id="dashArt" value={newDashState?.dashArt} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                    <div>
-                        <input id="art" value="" onChange={handleFormChange}/>
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Number of Songs Per Round:</label>
+                        </div>
+                        <div>
+                            <input id="songsPerRound" value={newDashState?.songsPerRound} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                </div>
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Number of Songs Per Round:</label>
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Number of Votes Per Player:</label>
+                        </div>
+                        <div>
+                            <input id="maxVotesAllowed" value={newDashState?.maxVotesAllowed} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                    <div>
-                        <input id="numberOfSongs" value="" onChange={handleFormChange}/>
+                    <div className="create-dash-form-item-checkbox">
+                        <div>
+                            <label>Enable Downvotes:</label>
+                        </div>
+                        <div className="create-dash-form-checkbox">
+                            <input
+                                type="checkbox" 
+                                id="isDownVotingEnabled"
+                                onChange={() => { 
+                                    setEnableDownvotes(!enableDownvotes); 
+                                }}
+                                checked={enableDownvotes}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Number of Votes Per Player:</label>
-                    </div>
-                    <div>
-                        <input id="maxVotesAllowed" value="" onChange={handleFormChange}/>
-                    </div>
-                </div>
-                <div className="create-dash-form-item-checkbox">
-                    <div>
-                        <label>Enable Downvotes:</label>
-                    </div>
-                    <div className="create-dash-form-checkbox">
-                        <input
-                            type="checkbox" 
-                            onChange={() => { setEnableDownvotes(!enableDownvotes) }}
-                            checked={enableDownvotes}
-                        />
-                    </div>
-                </div>
-                {
-                    enableDownvotes
-                        ?   (
-                            <div className="create-dash-form-item">
-                                <div>
-                                    <label>Max Downvotes Allowed:</label>
+                    {
+                        enableDownvotes
+                            ?   (
+                                <div className="create-dash-form-item">
+                                    <div>
+                                        <label>Max Downvotes Allowed:</label>
+                                    </div>
+                                    <div>
+                                        <input id="maxDownVotesAllowed" value={newDashState?.maxDownVotesAllowed} onChange={handleFormChange}/>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input id="maxDownVotesAllowed" value="" onChange={handleFormChange}/>
-                                </div>
-                            </div>
-                        )
-                        : <></>
-                }
-                <div className="create-dash-form-item">
-                    <div>
-                        <label>Number of Votes Per Player:</label>
+                            )
+                            : <></>
+                    }
+                    <div className="create-dash-form-item">
+                        <div>
+                            <label>Number of Votes Per Player:</label>
+                        </div>
+                        <div>
+                            <input id="maxVotesAllowed" value={newDashState?.maxVotesAllowed} onChange={handleFormChange}/>
+                        </div>
                     </div>
-                    <div>
-                        <input id="maxVotesAllowed" value="" onChange={handleFormChange}/>
+                </div>
+                <div className="create-dash-footer">
+                    <div className="create-dash-footer-button">
+                        <button>
+                            Submit
+                        </button>
+                    </div>
+                    <div className="create-dash-footer-button">
+                        <button>
+                            Cancel
+                        </button>
                     </div>
                 </div>
             </div>
-            <div className="create-dash-footer">
-                <div className="create-dash-footer-button">
-                    <button>
-                        Submit
-                    </button>
-                </div>
-                <div className="create-dash-footer-button">
-                    <button>
-                        Cancel
-                    </button>
-                </div>
+            <div style={{maxWidth: '500px', overflowY: 'scroll'}}>
+                {JSON.stringify(newDashState)}
             </div>
-        </div>
+            
         </div>
     );
 };

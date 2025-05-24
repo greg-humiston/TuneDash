@@ -1,7 +1,7 @@
 .dash-tile {
 	display: flex;
 	flex-direction: column;
-	min-width: 400px;
+	min-width: 450px;
 	width: 400px;
 	height: 95%;
 	border-radius: 8px;
@@ -160,6 +160,12 @@
 	display: flex;
 }
 
+.create-dash-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .create-dash-container {
 	display: flex;
 	flex-direction: column;
@@ -169,6 +175,9 @@
 	font-family: system-ui, -apple-system, sans-serif;
 	margin: 10px;
 	cursor: pointer;
+	width: 25%;
+	min-width: 400px;
+	background-color: white;
 }
 
 .create-dash-header {
@@ -190,18 +199,14 @@
 .create-dash-body {
 	display: flex;
 	flex-direction: column;
-	padding: 20px;
-	background-color: white;
-	border-radius: 0 0 8px 8px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px 20px 0px 20px;
 }
 
 .create-dash-footer {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	padding: 10px;
-	background-color: #f3f4f6;
+	padding: 0px 10px 10px 10px;	
 	border-radius: 0 0 8px 8px;
 	font-size: 14px;
 	font-weight: 500;
@@ -214,10 +219,24 @@
 	margin-bottom: 16px;
 }
 
+.create-dash-form-item > div {
+	margin-bottom: 8px;
+}
+
+.create-dash-form-item label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #374151;
+}
+
 .create-dash-form-item-checkbox {
 	display: flex;
 	align-items: flex-start;
 	gap: 8px;
 	margin-bottom: 16px;
 	vertical-align: middle;
+}
+
+.create-dash-footer-button {
+	margin: 5px;
 }
