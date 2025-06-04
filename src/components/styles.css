@@ -11,7 +11,6 @@
 	background-color: white;
 	font-family: system-ui, -apple-system, sans-serif;
 	margin: 10px;
-	cursor: pointer;
 }
 
 .dash-art-banner {
@@ -174,7 +173,6 @@
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	font-family: system-ui, -apple-system, sans-serif;
 	margin: 10px;
-	cursor: pointer;
 	width: 25%;
 	min-width: 400px;
 	background-color: white;

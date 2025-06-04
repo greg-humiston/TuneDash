@@ -6,6 +6,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
 import { AuthProvider, useAuth } from './auth'
+import { MockBackendProvider } from './mock_backend/backend'
 
 // Create a new router instance
 const router = createRouter({ 
@@ -32,7 +33,9 @@ declare module '@tanstack/react-router' {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
-      <InnerApp/>
+      <MockBackendProvider>
+        <InnerApp/>
+      </MockBackendProvider>
     </AuthProvider>
   </StrictMode>,
 );

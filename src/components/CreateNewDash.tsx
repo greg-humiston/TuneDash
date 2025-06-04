@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RoundsData } from "../views/dash_home/overviewMockData";
+import { useNavigate } from "@tanstack/react-router";
 
 const DEFAULT_DASH_DATA = {
     title: '',
@@ -54,7 +55,7 @@ const defaultDashState: NewDash = {
     title: '',
     description: '',
     dashMode: '',
-    dashArt: '',
+    dashArt: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/SpongeBob_SquarePants_character.png',
     isListed: false,
     totalRounds: 1,
     songsPerRound: 3,
@@ -69,6 +70,15 @@ const defaultDashState: NewDash = {
 export const CreateNewDash = (props: CreateNewDashProps) => {
     const [newDashState, setNewDashState] = useState(defaultDashState);
     const [enableDownvotes, setEnableDownvotes] = useState(false);
+    const navigate = useNavigate();
+
+    const handleSubmitNewDash = () => {
+        
+    };
+
+	const handleNavigateHome = () => {
+		navigate({ to: `../../home` });
+	};
 
     const handleFormChange = (data: React.ChangeEvent<HTMLInputElement>) => {
         const value = data.target.value;
@@ -92,7 +102,11 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             <label>Dash Title:</label>
                         </div>
                         <div>
-                            <input id="title" value={newDashState?.title} onChange={handleFormChange}/>
+                            <input 
+                                id="title" 
+                                value={newDashState?.title} onChange={handleFormChange}
+                                type="text"
+                            />
                         </div>
                     </div>
                     <div className="create-dash-form-item">
@@ -100,7 +114,12 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             <label>Dash Description:</label>
                         </div>
                         <div>
-                            <input id="description" value={newDashState?.description} onChange={handleFormChange}/>
+                            <input 
+                                id="description" 
+                                value={newDashState?.description} 
+                                onChange={handleFormChange}
+                                type="text"
+                            />
                         </div>
                     </div>
                     <div className="create-dash-form-item">
@@ -108,7 +127,12 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             <label>Dash Art:</label>
                         </div>
                         <div>
-                            <input id="dashArt" value={newDashState?.dashArt} onChange={handleFormChange}/>
+                            <input 
+                                id="dashArt" 
+                                value={newDashState?.dashArt} 
+                                onChange={handleFormChange}
+                                type="text"
+                            />
                         </div>
                     </div>
                     <div className="create-dash-form-item">
@@ -116,7 +140,13 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             <label>Number of Songs Per Round:</label>
                         </div>
                         <div>
-                            <input id="songsPerRound" value={newDashState?.songsPerRound} onChange={handleFormChange}/>
+                            <input 
+                                id="songsPerRound" 
+                                value={newDashState?.songsPerRound} 
+                                onChange={handleFormChange}
+                                type="number"
+                                min={1}
+                            />
                         </div>
                     </div>
                     <div className="create-dash-form-item">
@@ -124,7 +154,13 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             <label>Number of Votes Per Player:</label>
                         </div>
                         <div>
-                            <input id="maxVotesAllowed" value={newDashState?.maxVotesAllowed} onChange={handleFormChange}/>
+                            <input 
+                                id="maxVotesAllowed" 
+                                value={newDashState?.maxVotesAllowed} 
+                                onChange={handleFormChange}
+                                type="number"
+                                min={newDashState?.songsPerRound}
+                            />
                         </div>
                     </div>
                     <div className="create-dash-form-item-checkbox">
@@ -150,29 +186,27 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                                         <label>Max Downvotes Allowed:</label>
                                     </div>
                                     <div>
-                                        <input id="maxDownVotesAllowed" value={newDashState?.maxDownVotesAllowed} onChange={handleFormChange}/>
+                                        <input 
+                                            id="maxDownVotesAllowed" 
+                                            value={newDashState?.maxDownVotesAllowed} 
+                                            onChange={handleFormChange}
+                                            type="number"
+                                            min={newDashState?.songsPerRound}
+                                        />
                                     </div>
                                 </div>
                             )
                             : <></>
                     }
-                    <div className="create-dash-form-item">
-                        <div>
-                            <label>Number of Votes Per Player:</label>
-                        </div>
-                        <div>
-                            <input id="maxVotesAllowed" value={newDashState?.maxVotesAllowed} onChange={handleFormChange}/>
-                        </div>
-                    </div>
                 </div>
                 <div className="create-dash-footer">
                     <div className="create-dash-footer-button">
-                        <button>
+                        <button onClick={}>
                             Submit
                         </button>
                     </div>
                     <div className="create-dash-footer-button">
-                        <button>
+                        <button onClick={handleNavigateHome}>
                             Cancel
                         </button>
                     </div>

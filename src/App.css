@@ -185,7 +185,7 @@ a:hover {
 	position: absolute;
 	top: 100%;
 	right: 0px;
-	padding: 12px 0px 12px 12px;
+	padding: 12px;
 	background-color: rgb(26, 26, 26);
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -199,6 +199,11 @@ a:hover {
 
 .settings-container {
 	flex: 1;
+	margin: 5px;
+}
+
+.settings-container button {
+	margin: 2px; 
 }
 
 .settings-container button.disabled,
@@ -232,73 +237,8 @@ a:hover {
 	align-items: center;
 }
 
-.dashboard-container {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
-}
-
-.header-bar-container {
-	height: auto;
-	width: 100%;
-	background-color: rgb(72, 72, 72);
-	display: flex;
-	justify-content: space-between;
-}
-
 .header-bar-right {
 	display: flex;
-}
-
-.profile-picture {
-	display: inline-flex;
-	margin-right: 10px;
-}
-
-.profile-picture img {
-	height: auto;
-	width: auto;	
-	border-radius: 50%;
-	padding: 5px;
-}
-
-.settings-button {
-	display: flex;
-	align-items: center;
-	margin-right: 10px;
-	position: relative;
-}
-
-.settings-button > button {
-	border-color: transparent;
-	transition: none;
-}
-
-.settings-button > button:hover,
-.settings-button > button:focus {
-	border-color: transparent;
-	outline: none;
-}
-
-.settings-button > button.focused {
-	border-color: white;
-}
-
-.settings-popup {
-	position: absolute;
-	top: 100%;
-	right: 0px;
-	padding: 12px 0px 12px 12px;
-	background-color: rgb(26, 26, 26);
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-	z-index: 10;
-	min-width: 200px;
-	height: 500px;
-	display: flex;
-	flex-direction: column;
 }
 
 .logout-button-container {

@@ -34,7 +34,8 @@ const SettingsPopup = (props) => {
 	const isHomeButtonDisabled = location.pathname?.includes('home');
 	const homeButtonClassName = isHomeButtonDisabled ? 'disabled' : '';
 
-	const isCreateDashButtonDisabled = location.pathname?.includes('create_dash');
+	// const isCreateDashButtonHidden = 
+	const isCreateDashButtonDisabled = location.pathname?.includes('create_dash') || location.pathname?.includes('current_dash');	
 	const createDashButtonClassName = isCreateDashButtonDisabled ? 'disabled' : '';
 
 	return (
