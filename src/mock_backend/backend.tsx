@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import { MOCK_CURRENT_DASH_LIST, MOCK_OPEN_DASH_LIST } from '../views/dash_home/overviewMockData';
+import { MOCK_CURRENT_DASH_LIST, MOCK_OPEN_DASH_LIST, MOCK_USER_CONFIG_DATA, MOCK_USER_LIST } from '../views/dash_home/overviewMockData';
 
 const MockBackendContext = createContext({});
 
@@ -60,8 +60,9 @@ const useQuery = (queryFn, dependencies = []) => {
 
   // Mock Backend Provider
 export const MockBackendProvider = ({ children }) => {
-    // const [users, setUsers] = useState(initialUsers);
-    // const [posts, setPosts] = useState(initialPosts);
+    const [users, setUsers] = useState(MOCK_USER_LIST);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [posts, setPosts] = useState();
     const [dashes, setDashes] = useState([
         ...MOCK_CURRENT_DASH_LIST, 
         ...MOCK_OPEN_DASH_LIST
@@ -74,11 +75,34 @@ export const MockBackendProvider = ({ children }) => {
     const simulateDelay = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
   
     // Generic error handler
-    const handleError = (operation, error) => {
+    const handleError = (operation: any, error: any) => {
       setErrors(prev => ({ ...prev, [operation]: error.message }));
       setTimeout(() => {
         setErrors(prev => ({ ...prev, [operation]: null }));
       }, 3000);
+    };
+
+    const authAPI = {
+      login: async () => {
+        setIsAuthenticated(true);
+        const SESSION_ID = 1234567;
+        // TODO: determine return on login
+        return SESSION_ID;
+      },
+      logout: async () => {
+        setIsAuthenticated(false);
+        // TODO: determine return on logout
+        return null;
+      }
+    };
+
+    // TODO: what should this consist of data-wise?
+    // a. some minified data set
+    // b. ids that point to data sets (ex. list of current dashes) 
+    const userDataAPI = {
+      getUserConfigData: async () => {
+        return MOCK_USER_CONFIG_DATA
+      }
     };
 
     const dashesAPI = {
@@ -95,146 +119,91 @@ export const MockBackendProvider = ({ children }) => {
         }
       }
     };
+
     // Users API
     const usersAPI = {
       getAll: async () => {
-        setLoading(prev => ({ ...prev, users: true }));
-        try {
-          await simulateDelay();
-          setLoading(prev => ({ ...prev, users: false }));
-          return users;
-        } catch (error) {
-          handleError('users', error);
-          setLoading(prev => ({ ...prev, users: false }));
-          throw error;
-        }
+        // setLoading(prev => ({ ...prev, users: true }));
+        // try {
+        //   await simulateDelay();
+        //   setLoading(prev => ({ ...prev, users: false }));
+        //   return users;
+        // } catch (error) {
+        //   handleError('users', error);
+        //   setLoading(prev => ({ ...prev, users: false }));
+        //   throw error;
+        // }
       },
   
       getById: async (id) => {
-        setLoading(prev => ({ ...prev, [`user-${id}`]: true }));
-        try {
-          await simulateDelay(300);
-          const user = users.find(u => u.id === parseInt(id));
-          if (!user) throw new Error('User not found');
-          setLoading(prev => ({ ...prev, [`user-${id}`]: false }));
-          return user;
-        } catch (error) {
-          handleError(`user-${id}`, error);
-          setLoading(prev => ({ ...prev, [`user-${id}`]: false }));
-          throw error;
-        }
+        // setLoading(prev => ({ ...prev, [`user-${id}`]: true }));
+        // try {
+        //   await simulateDelay(300);
+        //   const user = users.find(u => u.id === parseInt(id));
+        //   if (!user) throw new Error('User not found');
+        //   setLoading(prev => ({ ...prev, [`user-${id}`]: false }));
+        //   return user;
+        // } catch (error) {
+        //   handleError(`user-${id}`, error);
+        //   setLoading(prev => ({ ...prev, [`user-${id}`]: false }));
+        //   throw error;
+        // }
       },
   
       create: async (userData) => {
-        setLoading(prev => ({ ...prev, createUser: true }));
-        try {
-          await simulateDelay();
-          const newUser = {
-            id: Math.max(...users.map(u => u.id)) + 1,
-            ...userData
-          };
-          setUsers(prev => [...prev, newUser]);
-          setLoading(prev => ({ ...prev, createUser: false }));
-          return newUser;
-        } catch (error) {
-          handleError('createUser', error);
-          setLoading(prev => ({ ...prev, createUser: false }));
-          throw error;
-        }
+        // setLoading(prev => ({ ...prev, createUser: true }));
+        // try {
+        //   await simulateDelay();
+        //   const newUser = {
+        //     id: Math.max(...users.map(u => u.id)) + 1,
+        //     ...userData
+        //   };
+        //   setUsers(prev => [...prev, newUser]);
+        //   setLoading(prev => ({ ...prev, createUser: false }));
+        //   return newUser;
+        // } catch (error) {
+        //   handleError('createUser', error);
+        //   setLoading(prev => ({ ...prev, createUser: false }));
+        //   throw error;
+        // }
       },
   
       update: async (id, userData) => {
-        setLoading(prev => ({ ...prev, updateUser: true }));
-        try {
-          await simulateDelay();
-          setUsers(prev => prev.map(user => 
-            user.id === parseInt(id) ? { ...user, ...userData } : user
-          ));
-          setLoading(prev => ({ ...prev, updateUser: false }));
-          return { id: parseInt(id), ...userData };
-        } catch (error) {
-          handleError('updateUser', error);
-          setLoading(prev => ({ ...prev, updateUser: false }));
-          throw error;
-        }
+        // setLoading(prev => ({ ...prev, updateUser: true }));
+        // try {
+        //   await simulateDelay();
+        //   setUsers(prev => prev.map(user => 
+        //     user.id === parseInt(id) ? { ...user, ...userData } : user
+        //   ));
+        //   setLoading(prev => ({ ...prev, updateUser: false }));
+        //   return { id: parseInt(id), ...userData };
+        // } catch (error) {
+        //   handleError('updateUser', error);
+        //   setLoading(prev => ({ ...prev, updateUser: false }));
+        //   throw error;
+        // }
       },
   
       delete: async (id) => {
-        setLoading(prev => ({ ...prev, deleteUser: true }));
-        try {
-          await simulateDelay();
-          setUsers(prev => prev.filter(user => user.id !== parseInt(id)));
-          setLoading(prev => ({ ...prev, deleteUser: false }));
-          return { success: true };
-        } catch (error) {
-          handleError('deleteUser', error);
-          setLoading(prev => ({ ...prev, deleteUser: false }));
-          throw error;
-        }
-      }
-    };
-  
-    // Posts API
-    const postsAPI = {
-      getAll: async () => {
-        setLoading(prev => ({ ...prev, posts: true }));
-        try {
-          await simulateDelay();
-          const postsWithUsers = posts.map(post => ({
-            ...post,
-            user: users.find(u => u.id === post.userId)
-          }));
-          setLoading(prev => ({ ...prev, posts: false }));
-          return postsWithUsers;
-        } catch (error) {
-          handleError('posts', error);
-          setLoading(prev => ({ ...prev, posts: false }));
-          throw error;
-        }
-      },
-  
-      getByUserId: async (userId) => {
-        setLoading(prev => ({ ...prev, [`posts-${userId}`]: true }));
-        try {
-          await simulateDelay(300);
-          const userPosts = posts.filter(p => p.userId === parseInt(userId));
-          setLoading(prev => ({ ...prev, [`posts-${userId}`]: false }));
-          return userPosts;
-        } catch (error) {
-          handleError(`posts-${userId}`, error);
-          setLoading(prev => ({ ...prev, [`posts-${userId}`]: false }));
-          throw error;
-        }
-      },
-  
-      create: async (postData) => {
-        setLoading(prev => ({ ...prev, createPost: true }));
-        try {
-          await simulateDelay();
-          const newPost = {
-            id: Math.max(...posts.map(p => p.id)) + 1,
-            ...postData
-          };
-          setPosts(prev => [...prev, newPost]);
-          setLoading(prev => ({ ...prev, createPost: false }));
-          return newPost;
-        } catch (error) {
-          handleError('createPost', error);
-          setLoading(prev => ({ ...prev, createPost: false }));
-          throw error;
-        }
+        // setLoading(prev => ({ ...prev, deleteUser: true }));
+        // try {
+        //   await simulateDelay();
+        //   setUsers(prev => prev.filter(user => user.id !== parseInt(id)));
+        //   setLoading(prev => ({ ...prev, deleteUser: false }));
+        //   return { success: true };
+        // } catch (error) {
+        //   handleError('deleteUser', error);
+        //   setLoading(prev => ({ ...prev, deleteUser: false }));
+        //   throw error;
+        // }
       }
     };
   
     const value = {
       users,
-      posts,
       loading,
       errors,
-      api: {
-        users: usersAPI,
-        posts: postsAPI
-      }
+      api: { users: usersAPI }
     };
   
     return (
