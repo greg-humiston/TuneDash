@@ -60,14 +60,13 @@
 
 .dash-description {
     padding: 25px;
-    border-bottom: 1px solid black;
     display: flex;
     max-height: 400px;
     overflow-y: auto;
 }
 
 .dash-description > label {
-    font-size: 25px;
+    font-size: 15px;
 }
 
 .tab-list-container {

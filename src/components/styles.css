@@ -52,6 +52,10 @@
 	gap: 4px;
 }
 
+.dash-tile .dash-badges {
+	position: absolute;
+}
+
 .dash-badge {
 	padding: 4px 8px;
 	border-radius: 9999px;
@@ -140,7 +144,6 @@
 	display: flex;
 	max-width: 100%;
 	overflow-x: auto;
-	border-bottom: 1px solid black;
 }
 
 .user-list .user-item {

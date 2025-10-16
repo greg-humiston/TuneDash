@@ -201,7 +201,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                 </div>
                 <div className="create-dash-footer">
                     <div className="create-dash-footer-button">
-                        <button onClick={}>
+                        <button onClick={() => {}}>
                             Submit
                         </button>
                     </div>

@@ -15,7 +15,7 @@ type DashOverviewProps = {
 
 type TabProps = {
 	tabData: Tab,
-	onTabClick: (tabId: string) => {}
+	onTabClick: (tabId: string) => void
 };
 
 const Tab = (props: TabProps) => {
@@ -32,7 +32,7 @@ const Tab = (props: TabProps) => {
 
 type TabListProps = {
 	tabList: Tab[],
-	onTabClick: (tabId: string) => {}
+	onTabClick: (tabId: string) => void
 };
 
 const TabList = (props: TabListProps) => {
@@ -61,7 +61,6 @@ type Tab = {
 const Rounds = (props) => {
 	const { dashId } = props;
 
-	const dashData = { dashId };
 
 	return (
 		<div className="rounds-container">
@@ -72,8 +71,6 @@ const Rounds = (props) => {
 
 const Standings = (props) => {
 	const { dashId } = props;
-
-	const dashData = { dashId };
 
 	return (
 		<div className="standings-container">
@@ -131,11 +128,16 @@ export const DashOverview = (props: DashOverviewProps) => {
 					<div className="dash-header-title">
 						<label>{dashData.title}</label>
 					</div>
-					<div className="dash-description">
-						<label>{dashData.description}</label>
+					<div className="flex">
+						<div className="dash-description">
+							<label>{dashData.description}</label>
+						</div>
+						<div>
+							<UserList users={MOCK_USER_LIST}/>
+						</div>
 					</div>
+
 				</div>
-				<UserList users={MOCK_USER_LIST}/>
 				<div className="round-info">  
 				</div>
 				<div className="content">
