@@ -5,7 +5,7 @@ import {
   useRouter,
 } from '@tanstack/react-router';
 
-import { useAuth } from '../../auth'
+import { useAuth } from '../../auth/auth'
 
 export const Route = createFileRoute('/auth/')({
   beforeLoad: ({ context, location }) => {

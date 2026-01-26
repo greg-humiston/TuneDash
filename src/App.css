@@ -160,6 +160,8 @@ a:hover {
 	background-color: rgb(72, 72, 72);
 	display: flex;
 	justify-content: flex-end;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
 
 .profile-picture {
@@ -168,8 +170,8 @@ a:hover {
 }
 
 .profile-picture img {
-	height: auto;
-	width: auto;	
+	height: 100%;
+	width: 100%;
 	border-radius: 50%;
 	padding: 5px;
 }

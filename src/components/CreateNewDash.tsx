@@ -1,23 +1,5 @@
 import { useState } from "react";
-import { RoundsData } from "../views/dash_home/overviewMockData";
 import { useNavigate } from "@tanstack/react-router";
-
-const DEFAULT_DASH_DATA = {
-    title: '',
-    description: '',
-    dashMode: '',
-    isDownVotingEnabled: false,
-    dashArt: '',
-    isListed: false,
-    totalRounds: 1,
-    songsPerRound: 3,
-    numberOfPlayers: 2, // 2 players needed by default
-    maxNumberOfPlayers: 2,
-    maxVotesAllowed: 3,
-    maxDownVotesAllowed: 0,
-    userList: [],
-    rounds: []
-}
 
 export type Round = {
 	roundId: string;
@@ -62,7 +44,7 @@ const defaultDashState: NewDash = {
     numberOfPlayers: 2, // 2 players needed by default
     maxNumberOfPlayers: 2,
     maxVotesAllowed: 3,
-    maxDownVotesAllowed: 0,
+    maxDownVotesAllowed: 1,
     userList: [],
     rounds: []
 };
@@ -77,7 +59,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
     };
 
 	const handleNavigateHome = () => {
-		navigate({ to: `../../home` });
+		navigate({ to: `../home` });
 	};
 
     const handleFormChange = (data: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,16 +72,20 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
         });
     };  
 
+    const handleFormSubmit = () => {
+        
+    }
+
     return (
         <div className="create-dash-wrapper">
             <div className="create-dash-container">
                 <div className="create-dash-header">
-                    <label>Create New Dash</label>
+                    <span>Create New Dash</span>
                 </div>
                 <div className="create-dash-body">
                     <div className="create-dash-form-item">
                         <div>
-                            <label>Dash Title:</label>
+                            <span>Dash Title:</span>
                         </div>
                         <div>
                             <input 
@@ -111,7 +97,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                     <div className="create-dash-form-item">
                         <div>
-                            <label>Dash Description:</label>
+                            <span>Dash Description:</span>
                         </div>
                         <div>
                             <input 
@@ -124,7 +110,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                     <div className="create-dash-form-item">
                         <div>
-                            <label>Dash Art:</label>
+                            <span>Dash Art:</span>
                         </div>
                         <div>
                             <input 
@@ -137,7 +123,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                     <div className="create-dash-form-item">
                         <div>
-                            <label>Number of Songs Per Round:</label>
+                            <span>Number of Songs Per Round:</span>
                         </div>
                         <div>
                             <input 
@@ -151,7 +137,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                     <div className="create-dash-form-item">
                         <div>
-                            <label>Number of Votes Per Player:</label>
+                            <span>Number of Votes Per Player:</span>
                         </div>
                         <div>
                             <input 
@@ -165,7 +151,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                     <div className="create-dash-form-item-checkbox">
                         <div>
-                            <label>Enable Downvotes:</label>
+                            <span>Enable Downvotes:</span>
                         </div>
                         <div className="create-dash-form-checkbox">
                             <input
@@ -183,7 +169,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                             ?   (
                                 <div className="create-dash-form-item">
                                     <div>
-                                        <label>Max Downvotes Allowed:</label>
+                                        <span>Max Downvotes Allowed:</span>
                                     </div>
                                     <div>
                                         <input 
@@ -191,7 +177,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                                             value={newDashState?.maxDownVotesAllowed} 
                                             onChange={handleFormChange}
                                             type="number"
-                                            min={newDashState?.songsPerRound}
+                                            min={1}
                                         />
                                     </div>
                                 </div>
@@ -201,7 +187,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                 </div>
                 <div className="create-dash-footer">
                     <div className="create-dash-footer-button">
-                        <button onClick={() => {}}>
+                        <button onClick={handleFormSubmit}>
                             Submit
                         </button>
                     </div>
@@ -212,7 +198,7 @@ export const CreateNewDash = (props: CreateNewDashProps) => {
                     </div>
                 </div>
             </div>
-            <div style={{maxWidth: '500px', overflowY: 'scroll'}}>
+            <div style={{maxWidth: '500px', overflowY: 'scroll', position: 'absolute', left: 0}}>
                 {JSON.stringify(newDashState)}
             </div>
             

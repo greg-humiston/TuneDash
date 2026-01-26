@@ -1,8 +1,13 @@
 
-import { MOCK_USER_CONFIG_DATA } from "../dash_home/overviewMockData";
+import { MOCK_USER_CONFIG_DATA } from "../../mock_data/userData";
 import { HeaderBar } from "./HeaderBar";
 
-export const Dashboard = (props) => {
+type DashboardProps = {
+	onLogout: () => void,
+	children: React.ReactNode
+};
+
+export const Dashboard = (props: DashboardProps) => {
 	const userConfigData = MOCK_USER_CONFIG_DATA;
 
 	return (

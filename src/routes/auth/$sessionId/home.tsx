@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Dashboard } from '../../../views/dash_dashboard/Dashboard';
-import { useAuth } from '../../../auth';
+import { useAuth } from '../../../auth/auth';
 import { DashOverview } from '../../../views/dash_home/DashOverview';
 
 const HomeRouteComponent = () => {

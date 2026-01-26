@@ -1,41 +1,25 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-// Import the generated route tree
-import { routeTree } from './routeTree.gen'
-import { AuthProvider, useAuth } from './auth'
-import { MockBackendProvider } from './mock_backend/backend'
+import { AuthProvider } from './auth/auth'
+import Provider from './router/Provider'
 
-// Create a new router instance
-const router = createRouter({ 
-  routeTree,
-  defaultPreload: 'intent',
-  scrollRestoration: true,
-  context: {
-    auth: undefined!, // This will be set after we wrap the app in an AuthProvider
-  },
-});
-
-const InnerApp = () => {
-  const auth = useAuth()
-  return <RouterProvider router={router} context={{ auth }} />
-};
-
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') {
+    return
   }
+
+  const { worker } = await import('./mock_backend/browser.ts');
+  return worker.start()
 }
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AuthProvider>
-      <MockBackendProvider>
-        <InnerApp/>
-      </MockBackendProvider>
-    </AuthProvider>
-  </StrictMode>,
-);
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <AuthProvider>
+          <Provider/>
+      </AuthProvider>
+    </StrictMode>
+  )
+});

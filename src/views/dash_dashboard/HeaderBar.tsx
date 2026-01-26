@@ -85,15 +85,16 @@ export const HeaderBar = (props) => {
 			<div className="logo-container">
 				<img className="logo-small" src="/logo.png" alt="icon"/>
 			</div>
-			<div className="header-bar-right">
-				<div className="profile-picture">
+			<div className="logo-container">
 					<a onClick={handleUserIconClick}>
-						<img 
+						<img
+							className="logo-small"
 							src={userConfigData.src} 
 							alt={userConfigData.alt}
 						/>
 					</a>
-				</div>
+		</div>
+		<div className="logo-container">
 				<div className="settings-button">
 					<IconButton 
 						className={isSettingsOpen ? 'focused' : ''}

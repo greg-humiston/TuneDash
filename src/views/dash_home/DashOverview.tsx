@@ -3,7 +3,7 @@ import { OpenDashes } from "./OpenDashes";
 import { 
 	MOCK_CURRENT_DASH_LIST, 
 	MOCK_OPEN_DASH_LIST, 
-} from "./overviewMockData";
+} from "../../mock_data/dashData";
 
 import './styles.css';
 

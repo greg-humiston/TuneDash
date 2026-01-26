@@ -197,10 +197,15 @@
 	color: white;
 }
 
+.create-dash-container span {
+	color: white;
+}
+
 .create-dash-body {
 	display: flex;
 	flex-direction: column;
 	padding: 20px 20px 0px 20px;
+	background-color: oklch(0.56 0 0);
 }
 
 .create-dash-footer {
@@ -212,6 +217,8 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #374151;
+		background-color: oklch(0.56 0 0);
+
 }
 
 .create-dash-form-item {
