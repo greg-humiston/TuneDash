@@ -9,7 +9,6 @@ const RouteComponent = () => {
 
   if (!dashData) {
     const handleReturnTohome = () => {
-      debugger;
       if (location.pathName?.includes('home')) {
         return;
       }

@@ -19,10 +19,6 @@ export const Login = (props) => {
     }
 	};
 
-	// const onSubmit = () => {
-	// 	props.onLoginSubmit();
-	// };
-
 	return (
 		<div className="login">
 			<div className="login-container">

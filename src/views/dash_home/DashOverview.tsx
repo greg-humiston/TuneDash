@@ -1,22 +1,23 @@
 import { CurrentDashes } from "./CurrentDashes";
 import { OpenDashes } from "./OpenDashes";
-import { 
-	MOCK_CURRENT_DASH_LIST, 
-	MOCK_OPEN_DASH_LIST, 
-} from "../../mock_data/dashData";
+
+import { useCurrentUser } from '../../hooks/useAuth';
 
 import './styles.css';
-
-const MOCK_DASH_OVERVIEW = {
-	currentDashList: MOCK_CURRENT_DASH_LIST,
-	openDashList: MOCK_OPEN_DASH_LIST
-};
-
+import { useQueryCurrentDashes, useQueryOpenDashes } from "../../hooks/useDashes";
 
 export const DashOverview = () => {
-	const currentDashList = MOCK_DASH_OVERVIEW.currentDashList;
-	const openDashList = MOCK_DASH_OVERVIEW.openDashList;
+	const { data: currentUser } = useCurrentUser();
+	
+	// debugger;
+	const { data: currentDashList = [], isLoading } = useQueryCurrentDashes(currentUser.id);
+	const { data: openDashList = [], isLoading: _isLoading } = useQueryOpenDashes(currentUser.id);
 
+	if (isLoading || _isLoading) {
+		return (
+			<div>Loading...</div>
+		)
+	}
 	return (
 		<div className="dashboard-container">
 			<CurrentDashes dashList={currentDashList}/>

@@ -10,6 +10,7 @@ import {
   UserConfigData
 } from '../mock_data/userData';
 import { AuthFormSubmission, RegisterFormSubmission } from './types';
+import { MOCK_CURRENT_DASH_LIST, MOCK_OPEN_DASH_LIST } from '../mock_data/dashData';
 
 type SessionData = {
   token: string;
@@ -127,19 +128,32 @@ export const handlers = [
     return HttpResponse.json(userWithoutPassword, { status: 201 })
   }),
 
+  // -------------------- DASHES -----------------------
+  http.post(
+    `/api/dash/currentDashes`,
+    () => {
+      return HttpResponse.json(MOCK_CURRENT_DASH_LIST)
+    }
+  ),
+  http.post(
+    `/api/dash/openDashes`,
+    () => {
+      return HttpResponse.json(MOCK_OPEN_DASH_LIST)
+    }
+  )
   // GET request
-  http.get('/api/users', () => {
-    return HttpResponse.json(userList)
-  }),
+  // http.get('/api/users', () => {
+  //   return HttpResponse.json(userList)
+  // }),
 
   // GET single user
-  http.get('/api/users/:id', ({ params }) => {
-    const user = userList.find(u => u.id === Number(params.id))
-    if (!user) {
-      return new HttpResponse(null, { status: 404 })
-    }
-    return HttpResponse.json(user)
-  }),
+  // http.get('/api/users/:id', ({ params }) => {
+  //   const user = userList.find(u => u.id === Number(params.id))
+  //   if (!user) {
+  //     return new HttpResponse(null, { status: 404 })
+  //   }
+  //   return HttpResponse.json(user)
+  // }),
 
   // POST request
   // http.post('/api/users', async ({ request }) => {

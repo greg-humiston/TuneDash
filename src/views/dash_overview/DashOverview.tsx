@@ -1,6 +1,6 @@
 import SettingsIconSVG from '../../assets/settings.svg?react';
 
-import { DashData, MOCK_USER_LIST } from "../../mock_data/dashData";
+import { DashData } from "../../mock_data/dashData";
 
 import './styles.css';
 
