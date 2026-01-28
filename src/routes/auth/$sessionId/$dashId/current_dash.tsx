@@ -1,18 +1,15 @@
-import { createFileRoute, useLocation, useNavigate } from '@tanstack/react-router'
-import { MOCK_CURRENT_DASH_DATA } from '../../../../views/dash_home/overviewMockData';
+import { createFileRoute, useLocation, useNavigate, useParams } from '@tanstack/react-router'
 import { Dashboard } from '../../../../views/dash_dashboard/Dashboard';
 import { DashOverview } from '../../../../views/dash_overview/DashOverview';
 
 const RouteComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { dashId } = useParams({ strict: false })
 
-  // TODO: replace with query
-  const dashData = MOCK_CURRENT_DASH_DATA;
-
-  if (!dashData) {
+  if (!dashId) {
     const handleReturnTohome = () => {
-      if (location.pathName?.includes('home')) {
+      if (location.pathname?.includes('home')) {
         return;
       }
 
@@ -28,8 +25,8 @@ const RouteComponent = () => {
   }
 
   return (
-    <Dashboard>
-      <DashOverview dashData={dashData}/>
+    <Dashboard onLogout={() => {}}>
+      <DashOverview dashId={dashId}/>
     </Dashboard>
   );
 };

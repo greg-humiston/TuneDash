@@ -83,7 +83,7 @@ export type NewMessage = {
 };
 
 export type DashData = {
-	dashId: string;
+	dashId: number;
   title: string;
   description: string;
   dashMode: 'Accelerated' | string;
@@ -249,7 +249,7 @@ export const MOCK_CHAT: Chat = {
 
 export const MOCK_CURRENT_DASH_LIST: DashData[] = [
 	{
-		dashId: '123',
+		dashId: 123,
 		title: 'Jamz of the month 24-25',
 		description: 'The point of this league is to share what you\'ve been vibing to this month. It doesn\'t have to be a new release or anything, just whatever you\'ve been stuck on enjoying. Also, it should be fun. No negative vibes allowed. Songs are due on the last of the month by 11:30 p.m. voting is due by 6:00 p.m. on the 7th of the following month. At the end of each month we\'ll have a nice lil playlist to kick off the next month. I think it\'ll be a fun way to share what we\'ve all been listening to! Thanks.',
 		dashMode: 'Accelerated',
@@ -271,7 +271,7 @@ export const MOCK_CURRENT_DASH_LIST: DashData[] = [
 
 export const MOCK_OPEN_DASH_LIST: DashData[] = [
 	{
-		dashId: '1234',
+		dashId: 1234,
 		title: 'WORST songs of all time',
 		description: 'submit/vote for only terrible songs matching each theme',
 		dashMode: 'Accelerated',
@@ -290,7 +290,7 @@ export const MOCK_OPEN_DASH_LIST: DashData[] = [
 		hasVotesBeenSubmitted: true
 	},
 	{
-		dashId: '12345',
+		dashId: 12345,
 		title: 'Three Geniuses: Stevie, Bowie, Prince',
 		description: 'A journey through the long and varied careers of the three musical geniuses of the rock era.',
 		dashMode: 'Accelerated',
@@ -309,7 +309,7 @@ export const MOCK_OPEN_DASH_LIST: DashData[] = [
 		hasVotesBeenSubmitted: true
 	},
 	{
-		dashId: '123456',
+		dashId: 123456,
 		title: 'Jamz of the month 24-25',
 		description: 'The point of this league is to share what you\'ve been vibing to this month. It doesn\'t have to be a new release or anything, just whatever you\'ve been stuck on enjoying. Also, it should be fun. No negative vibes allowed. Songs are due on the last of the month by 11:30 p.m. voting is due by 6:00 p.m. on the 7th of the following month. At the end of each month we\'ll have a nice lil playlist to kick off the next month. I think it\'ll be a fun way to share what we\'ve all been listening to! Thanks.',
 		dashMode: 'Accelerated',

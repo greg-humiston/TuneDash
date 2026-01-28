@@ -11,6 +11,16 @@ export const useQueryCurrentDashes = (userId: number) => {
   });
 };
 
+export const useQueryCurrentDash = (dashId: number) => {
+	return useQuery({
+    queryKey: ['currentDash'],
+    queryFn: () => {
+			// debugger;
+			return dashApi.getCurrentDash(dashId)
+		},    
+  });
+};
+
 export const useQueryOpenDashes = (userId: number) => {
 	return useQuery({
     queryKey: ['openDashes'],

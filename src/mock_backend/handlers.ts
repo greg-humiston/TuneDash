@@ -136,6 +136,21 @@ export const handlers = [
     }
   ),
   http.post(
+    `/api/dash/currentDash`,
+    async ({ request }) => {
+      const { dashId } = await request.json();
+      const currentDash = MOCK_CURRENT_DASH_LIST.find((dash) => {
+        return dash.dashId == dashId;
+      });
+
+      if (!currentDash) {
+        return  HttpResponse.json();
+      }
+
+      return HttpResponse.json(currentDash)
+    }
+  ),
+  http.post(
     `/api/dash/openDashes`,
     () => {
       return HttpResponse.json(MOCK_OPEN_DASH_LIST)
