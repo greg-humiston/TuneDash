@@ -1,10 +1,10 @@
-import { useNavigate } from "@tanstack/react-router";
-import { DashData } from "../views/dash_home/overviewMockData";
 import './styles.css';
 import classNames from '../styles/classNames';
+import { DashData } from "../mock_data/dashData";
 
 type DashListItemProps = {
-	dashData: DashData
+	dashData: DashData;
+  handleDashSelect: (dashId: number) => void;
 };
 
 const formatDate = (dateString: string) => {
@@ -13,18 +13,12 @@ const formatDate = (dateString: string) => {
 };
 
 export const DashListItem = (props: DashListItemProps) => {
-	const { dashData } = props;
-  const navigate = useNavigate();
-
-	const handleDashItemClick = () => {
-    // TODO: pivot route off type of dash (open vs. current)
-    navigate({ to: `../${dashData.dashId}/current_dash` });
-	};
+	const { dashData, handleDashSelect } = props;
 
 	return (
 		<div 
 			className={classNames.container}
-			onClick={handleDashItemClick}
+			onClick={handleDashSelect}
 		>
       {/* Art Banner */}
       <div className={classNames.artBanner}>

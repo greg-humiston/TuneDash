@@ -1,14 +1,14 @@
 import { createFileRoute, useLocation, useNavigate } from '@tanstack/react-router'
-import { MOCK_CURRENT_DASH_DATA } from '../../../../views/dash_home/overviewMockData';
 import { Dashboard } from '../../../../views/dash_dashboard/Dashboard';
 import { DashOverview } from '../../../../views/dash_overview/DashOverview';
+import { MOCK_CURRENT_DASH_LIST } from '../../../../mock_data/dashData';
 
 const RouteComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   // TODO: replace with query
-  const dashData = MOCK_CURRENT_DASH_DATA;
+  const dashData = MOCK_CURRENT_DASH_LIST[0];
 
   if (!dashData) {
     const handleReturnTohome = () => {

@@ -3,8 +3,17 @@ import MenuIcon from '../../assets/menu_white.svg?react';
 import '../../App.css';
 import { IconButton } from '../../components/IconButton';
 import { useLocation, useNavigate } from '@tanstack/react-router';
+import { useAuth } from '../../auth/auth';
+import { UserConfigData } from '../../mock_data/userData';
 
-const SettingsPopupButton = (props) => {
+type SettingsPopupButtonProps = {
+	text: string;
+	onClick: () => void;
+	className: string;
+	isDisabled: boolean;
+};
+
+const SettingsPopupButton = (props: SettingsPopupButtonProps) => {
 	const { text, onClick, className, isDisabled } = props;
 	return (
 		<div className="settings-popup-button">
@@ -19,7 +28,11 @@ const SettingsPopupButton = (props) => {
 	);
 };
 
-const SettingsPopup = (props) => {
+type SettingPopupProps = {
+	onLogout: () => void;
+};
+
+const SettingsPopup = (props: SettingPopupProps) => {
 	const location = useLocation();
   	const navigate = useNavigate();
 
@@ -57,8 +70,8 @@ const SettingsPopup = (props) => {
 			<div className="logout-button-container">
 				<SettingsPopupButton
 					onClick={props.onLogout}
-					disabled={false}
 					className={homeButtonClassName}
+					isDisabled={false}
 					text="Logout"
 				/>			
 			</div>
@@ -66,13 +79,30 @@ const SettingsPopup = (props) => {
 	);
 };
 
-export const HeaderBar = (props) => {
-	const { userConfigData, onLogout } = props;
+type HeaderBarProps = {
+	userConfigData: UserConfigData
+};
+
+export const HeaderBar = (props: HeaderBarProps) => {
+	const { userConfigData } = props;
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+	const auth = useAuth();
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+		try {
+			await auth.logout();
+			await navigate({ to: '/' });
+		} catch (e) {
+			console.log('error logging out:', e);
+		}
+	};
+
 
 	const handleUserIconClick = (e: Event) => {
 		e.preventDefault();
-		// TODO
+		// TODO: allow access to user config data editing using this handler
 	};
 
 	const handleOnMenuClick = (e: Event) => {
@@ -93,8 +123,8 @@ export const HeaderBar = (props) => {
 							alt={userConfigData.alt}
 						/>
 					</a>
-		</div>
-		<div className="logo-container">
+			</div>
+			<div className="logo-container">
 				<div className="settings-button">
 					<IconButton 
 						className={isSettingsOpen ? 'focused' : ''}
@@ -103,9 +133,7 @@ export const HeaderBar = (props) => {
 					/>
 					{
 						isSettingsOpen
-							?	(
-								<SettingsPopup onLogout={onLogout}/>
-							)
+							?	<SettingsPopup onLogout={handleLogout}/>
 							: ''
 					}
 				</div>

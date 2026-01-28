@@ -3,8 +3,7 @@ import { MOCK_USER_CONFIG_DATA } from "../../mock_data/userData";
 import { HeaderBar } from "./HeaderBar";
 
 type DashboardProps = {
-	onLogout: () => void,
-	children: React.ReactNode
+	onLogout: () => void
 };
 
 export const Dashboard = (props: DashboardProps) => {
@@ -14,7 +13,6 @@ export const Dashboard = (props: DashboardProps) => {
 		<div className="dashboard-container">
 			<HeaderBar 
 				userConfigData={userConfigData}
-				onLogout={props.onLogout}
 			/>
 			{props.children}
 		</div>
