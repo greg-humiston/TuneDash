@@ -1,10 +1,4 @@
 import { http, HttpResponse } from 'msw'
-
-// import {
-// 	MOCK_CURRENT_DASH_LIST,
-// 	MOCK_OPEN_DASH_LIST
-// } from '../mock_data/dashData';
-
 import {
   MOCK_USER_LIST,
   UserConfigData

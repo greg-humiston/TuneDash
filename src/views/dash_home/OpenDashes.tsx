@@ -1,13 +1,17 @@
 import { DashListItem } from "../../components/DashListItem";
-import { DashData } from "./overviewMockData";
+import { DashData } from "../../mock_data/dashData";
 import './styles.css';
 
 type OpenDashesProps = {
-	dashList: DashData[]
+	dashList: DashData[],
+	handleDashSelect: (dashId: number) => void
 };
 
 export const OpenDashes = (props: OpenDashesProps) => {
-	const { dashList } = props;
+	const { 
+		dashList, 
+		handleDashSelect 
+	} = props;
 
 	return (
 		<div className="dashes-container">
@@ -25,7 +29,11 @@ export const OpenDashes = (props: OpenDashesProps) => {
 				{
 					dashList.map((dashData: DashData) => {
 						return (
-							<DashListItem dashData={dashData} key={dashData.dashId}/>
+							<DashListItem 
+								dashData={dashData} 
+								key={dashData.dashId}
+								handleDashSelect={handleDashSelect}
+							/>
 						);
 					})
 				}

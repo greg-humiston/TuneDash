@@ -1,23 +1,10 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Dashboard } from '../../../views/dash_dashboard/Dashboard';
-import { useAuth } from '../../../auth/auth';
 import { DashOverview } from '../../../views/dash_home/DashOverview';
 
 const HomeRouteComponent = () => {
-  const auth = useAuth();
-  const navigate = Route.useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await auth.logout();
-      await navigate({ to: '/' });
-    } catch (e) {
-      console.log('error logging out:', e);
-    }
-  };
-
   return (
-    <Dashboard onLogout={handleLogout}>
+    <Dashboard>
       <DashOverview/>  
     </Dashboard>
   );

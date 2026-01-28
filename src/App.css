@@ -91,6 +91,7 @@ h1, h2 {
 .form-input {
 	width: 100%;
 	display: flex;
+	color: black;
 }
 
 label {
