@@ -83,7 +83,7 @@ export type NewMessage = {
 };
 
 export type DashData = {
-	dashId: string;
+  dashId: number;
   title: string;
   description: string;
   dashMode: 'Accelerated' | string;

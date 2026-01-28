@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import MenuIcon from '../../assets/menu_white.svg?react';
 import '../../App.css';
 import { IconButton } from '../../components/IconButton';
@@ -100,8 +100,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
 	};
 
 
-	const handleUserIconClick = (e: Event) => {
-		e.preventDefault();
+	const handleUserIconClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
 		// TODO: allow access to user config data editing using this handler
 	};
 
